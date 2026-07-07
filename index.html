@@ -1,0 +1,1786 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 이력서·자소서·포트폴리오 서비스 캡처 비교 보드</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --surface-soft: #f1f4f8;
+      --line: #d9dee7;
+      --line-strong: #b8c1cf;
+      --text: #172033;
+      --muted: #637083;
+      --primary: #2563eb;
+      --primary-soft: #e8f0ff;
+      --green: #0f8b6f;
+      --amber: #b86b00;
+      --red: #c2413a;
+      --shadow: 0 8px 22px rgba(24, 34, 54, .08);
+      --radius: 8px;
+      --stage-width: 248px;
+      --capture-width: 300px;
+      --capture-height: 190px;
+      font-family: Inter, Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 7px;
+      padding: 8px 11px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    button:hover { border-color: var(--line-strong); background: #f8fafc; }
+    button.primary { background: var(--primary); border-color: var(--primary); color: white; }
+    button.ghost { background: transparent; }
+    button.danger { color: var(--red); border-color: #f1b8b5; background: #fff7f7; }
+    button.small { padding: 5px 8px; font-size: 12px; }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 7px;
+      padding: 8px 9px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 78px;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .13);
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 252px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: #111827;
+      color: white;
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow: auto;
+    }
+
+    .brand {
+      padding: 3px 4px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .brand-title {
+      font-weight: 760;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .brand-sub {
+      color: #aab4c5;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    .nav button {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      color: #dbe4f0;
+      border: 1px solid transparent;
+      padding: 10px 10px;
+    }
+
+    .nav button.active {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.12);
+      color: white;
+    }
+
+    .sidebar-tools {
+      margin-top: auto;
+      display: grid;
+      gap: 8px;
+    }
+
+    .sidebar-tools button {
+      background: #1f2937;
+      color: #f8fafc;
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .main {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246, 247, 249, .92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 22px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-title {
+      font-weight: 760;
+      font-size: 18px;
+    }
+
+    .top-sub {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .content {
+      padding: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .view { display: none; }
+    .view.active { display: grid; gap: 18px; }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      min-width: 0;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .panel-title h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .panel-title p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: #fbfcfe;
+    }
+
+    .stat-label { color: var(--muted); font-size: 12px; }
+    .stat-value { font-weight: 780; font-size: 26px; margin-top: 5px; }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .toolbar > * { max-width: 260px; }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    .service-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfcfe;
+      padding: 13px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .service-card h3 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: #344155;
+      font-size: 12px;
+      border: 1px solid #e3e8ef;
+    }
+
+    .tag.good { color: var(--green); background: #e9f8f3; border-color: #cceadf; }
+    .tag.warn { color: var(--amber); background: #fff5e3; border-color: #f3dfb8; }
+    .tag.blue { color: #1d4ed8; background: var(--primary-soft); border-color: #c9dafd; }
+
+    .progress {
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e6ebf2;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--primary);
+    }
+
+    .muted { color: var(--muted); }
+    .small-text { font-size: 12px; }
+
+    .flow-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 7px;
+      align-content: start;
+      min-width: 0;
+      max-width: 280px;
+      overflow: hidden;
+    }
+
+    #flowEditor {
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .service-list button {
+      text-align: left;
+      background: #fbfcfe;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .service-list button strong {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .service-list button .small-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .service-list button.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      color: #1748b5;
+      font-weight: 700;
+    }
+
+    .editor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .step-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfcfe;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: var(--stage-width) minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .step-meta {
+      display: grid;
+      gap: 8px;
+    }
+
+    .step-index {
+      font-size: 12px;
+      font-weight: 780;
+      color: var(--primary);
+    }
+
+    .capture-box {
+      min-height: var(--capture-height);
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      background: #f8fafc;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .capture-box.has-image {
+      border-style: solid;
+      background: #0b1220;
+    }
+
+    .capture-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #0b1220;
+    }
+
+    .capture-placeholder {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .capture-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .file-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 28px;
+      right: 32px;
+      z-index: 200;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      padding: 13px 26px;
+      font-size: 15px;
+      font-weight: 700;
+      box-shadow: 0 4px 18px rgba(59,130,246,0.45);
+      cursor: pointer;
+      display: none;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+    }
+
+    .fab:hover {
+      background: #2563eb;
+      box-shadow: 0 6px 24px rgba(59,130,246,0.55);
+      transform: translateY(-2px);
+    }
+
+    .drag-handle {
+      cursor: grab;
+      color: var(--muted);
+      font-size: 20px;
+      text-align: center;
+      padding: 4px 0;
+      user-select: none;
+      line-height: 1;
+      letter-spacing: 1px;
+    }
+
+    .drag-handle:active {
+      cursor: grabbing;
+    }
+
+    .step-card.step-dragging {
+      opacity: 0.38;
+      border-style: dashed;
+    }
+
+    .step-card.drag-over-top {
+      border-top: 3px solid var(--primary);
+    }
+
+    .step-card.drag-over-bottom {
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .dropzone {
+      border: 2px dashed var(--line-strong);
+      border-radius: var(--radius);
+      background: #f8fafc;
+      min-height: 120px;
+      padding: 8px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .dropzone.drag-over {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+
+    .drop-hint {
+      border: none;
+      background: transparent;
+      min-height: 90px;
+    }
+
+    .image-thumb-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .image-thumb-wrap {
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .image-thumb-wrap img {
+      display: block;
+      height: 120px;
+      max-width: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .image-thumb-wrap img:hover {
+      opacity: 0.85;
+    }
+
+    .thumb-remove {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      font-size: 14px;
+      line-height: 22px;
+      text-align: center;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thumb-remove:hover {
+      background: #e53e3e;
+    }
+
+    .img-count-badge {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+
+    .modal-img-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.38);
+      color: #fff;
+      border: none;
+      font-size: 2.4rem;
+      line-height: 1;
+      padding: 18px 12px;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 4px;
+      transition: background 0.15s;
+      user-select: none;
+    }
+
+    .modal-arrow:hover {
+      background: rgba(0, 0, 0, 0.65);
+    }
+
+    .modal-arrow-left {
+      left: 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .modal-arrow-right {
+      right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .compare-section {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .stage-board {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .stage-board-header {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: #fbfcfe;
+    }
+
+    .horizontal-scroll {
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 14px;
+      min-width: 0;
+    }
+
+    .compare-row {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: var(--capture-width);
+      gap: 12px;
+      align-items: start;
+      width: max-content;
+    }
+
+    .compare-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .compare-card-title {
+      font-weight: 730;
+      min-height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .compare-card .capture-box {
+      width: 100%;
+      height: var(--capture-height);
+      min-height: 0;
+      min-width: 0;
+    }
+
+    .note {
+      font-size: 12px;
+      color: var(--muted);
+      min-height: 40px;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      min-width: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #344155;
+      font-size: 12px;
+      background: #f8fafc;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(9, 14, 24, .82);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-inner {
+      width: min(94vw, 1280px);
+      max-height: 92vh;
+      background: #0b1220;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 10px 12px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .modal img {
+      max-width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      margin: auto;
+      display: block;
+    }
+
+    .empty-state {
+      border: 1px dashed var(--line-strong);
+      background: #fbfcfe;
+      color: var(--muted);
+      padding: 24px;
+      text-align: center;
+      border-radius: var(--radius);
+    }
+
+    @media (max-width: 980px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+      .nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow-layout { grid-template-columns: 1fr; }
+      .service-list { max-width: none; }
+      .step-card { grid-template-columns: 1fr; }
+      .editor-grid { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .sidebar, .topbar, .capture-actions, .service-list, .toolbar, button, input, select, textarea { display: none !important; }
+      .app { display: block; }
+      .content { padding: 0; }
+      .view { display: block !important; page-break-after: always; }
+      .panel, .stage-board { box-shadow: none; break-inside: avoid; }
+      body { background: white; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-title">AI 서비스 캡처 비교 보드</div>
+        <div class="brand-sub">이력서·자소서·포트폴리오 UX 흐름 조사</div>
+      </div>
+      <nav class="nav" id="nav">
+        <button class="active" data-view="dashboard">전체 요약</button>
+        <button data-view="service-flow">서비스별 흐름</button>
+        <button data-view="stage-compare">단계별 비교</button>
+        <button data-view="output-compare">결과물 비교</button>
+        <button data-view="strategy">기획 적용점</button>
+      </nav>
+      <div class="sidebar-tools">
+        <button id="exportJson">백업 내보내기</button>
+        <button id="importJson">백업 불러오기</button>
+        <input class="file-input" id="importJsonInput" type="file" accept="application/json">
+        <button id="resetData" class="danger">초기화</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="top-title" id="viewTitle">전체 요약</div>
+          <div class="top-sub">캡처 이미지는 이 브라우저에 저장됩니다. 중요한 작업 후에는 백업을 내보내세요.</div>
+        </div>
+        <div class="top-actions">
+          <button id="addServiceBtn" class="primary">서비스 추가</button>
+          <button onclick="window.print()">PDF 출력</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <section id="dashboard" class="view active">
+          <div class="grid-4">
+            <div class="stat">
+              <div class="stat-label">서비스 수</div>
+              <div class="stat-value" id="statServices">0</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">플로우 단계 수</div>
+              <div class="stat-value" id="statSteps">0</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">등록된 캡처</div>
+              <div class="stat-value" id="statImages">0</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">평균 캡처율</div>
+              <div class="stat-value" id="statProgress">0%</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">
+              <div>
+                <h2>서비스 요약</h2>
+                <p>조사 대상 서비스의 유형, 결과물, 캡처 진행률을 빠르게 확인합니다.</p>
+              </div>
+              <div class="toolbar">
+                <input id="serviceSearch" placeholder="서비스 검색">
+                <select id="tagFilter">
+                  <option value="">전체 유형</option>
+                </select>
+              </div>
+            </div>
+            <div class="service-grid" id="serviceGrid"></div>
+          </div>
+        </section>
+
+        <section id="service-flow" class="view">
+          <div class="panel">
+            <div class="panel-title">
+              <div>
+                <h2>서비스별 실제 흐름</h2>
+                <p>서비스마다 다른 사용 흐름을 그대로 기록하고, 각 단계에 캡처와 메모를 붙입니다.</p>
+              </div>
+            </div>
+            <div class="flow-layout">
+              <div class="service-list" id="serviceList"></div>
+              <div id="flowEditor"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="stage-compare" class="view">
+          <div class="panel">
+            <div class="panel-title">
+              <div>
+                <h2>공통 단계별 가로 비교</h2>
+                <p>서비스별 실제 단계 중 공통 분류가 같은 캡처를 모아 가로로 비교합니다.</p>
+              </div>
+              <div class="toolbar">
+                <select id="commonStageFilter"></select>
+              </div>
+            </div>
+            <div class="compare-section" id="stageCompare"></div>
+          </div>
+        </section>
+
+        <section id="output-compare" class="view">
+          <div class="panel">
+            <div class="panel-title">
+              <div>
+                <h2>결과물 비교</h2>
+                <p>AI가 최종적으로 제공하는 산출물의 형태와 유료 전환 지점을 비교합니다.</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="outputTable"></table>
+            </div>
+          </div>
+        </section>
+
+        <section id="strategy" class="view">
+          <div class="panel">
+            <div class="panel-title">
+              <div>
+                <h2>B2B/B2G 기획 적용점</h2>
+                <p>조사 내용을 초기 제품 기획, 기관 관리자 기능, 결과 리포트 설계로 연결합니다.</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="strategyTable"></table>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <button id="fabAddStep" class="fab" onclick="addStep()">＋ 단계 추가</button>
+
+  <div class="modal" id="imageModal" role="dialog" aria-modal="true">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <div id="modalTitle">캡처 보기</div>
+        <button id="closeModal" class="small">닫기</button>
+      </div>
+      <div class="modal-img-container">
+        <button id="modalPrev" class="modal-arrow modal-arrow-left" style="display:none" onclick="navigateModal(-1)">&#8249;</button>
+        <img id="modalImage" alt="">
+        <button id="modalNext" class="modal-arrow modal-arrow-right" style="display:none" onclick="navigateModal(1)">&#8250;</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const commonStages = [
+      { id: "entry", name: "01 서비스 진입/첫 화면" },
+      { id: "signup", name: "02 가입 또는 시작 조건" },
+      { id: "input", name: "03 입력/업로드 방식" },
+      { id: "ai_run", name: "04 AI 실행 방식" },
+      { id: "result", name: "05 결과/피드백 화면" },
+      { id: "export", name: "06 내보내기/유료 전환/후속 기능" },
+      { id: "portfolio", name: "07 포트폴리오 관련 기능" },
+      { id: "admin", name: "08 관리자/기관 기능" },
+      { id: "etc", name: "기타" }
+    ];
+
+    const defaultData = {
+      version: 1,
+      selectedServiceId: "saramin",
+      services: [
+        service("saramin", "사람인 AI 서류 코칭", ["국내", "자소서 첨삭", "이력서 첨삭"], "점수/피드백", [
+          step("서비스 진입", "entry"),
+          step("로그인/회원가입", "signup"),
+          step("이력서 또는 자소서 선택", "input"),
+          step("문서 입력/불러오기", "input"),
+          step("AI 분석 실행", "ai_run"),
+          step("점수/피드백 확인", "result"),
+          step("수정 제안 확인", "result"),
+          step("추가 기능/유료 전환", "export")
+        ]),
+        service("wanted", "원티드 이력서", ["국내", "이력서 작성", "프로필"], "이력서 프로필", [
+          step("서비스 진입", "entry"),
+          step("로그인/회원가입", "signup"),
+          step("이력서 작성 진입", "input"),
+          step("경력/학력/스킬 입력", "input"),
+          step("추천/피드백 확인", "result"),
+          step("지원 또는 프로필 공개", "export")
+        ]),
+        service("jasoseol", "자소설닷컴", ["국내", "자소서 작성", "문항 관리"], "자소서 문항", [
+          step("서비스 진입", "entry"),
+          step("로그인/회원가입", "signup"),
+          step("기업/공고 선택", "input"),
+          step("자소서 문항 작성", "input"),
+          step("AI 또는 맞춤법 기능 실행", "ai_run"),
+          step("문항별 피드백 확인", "result"),
+          step("저장/제출 관리", "export")
+        ]),
+        service("jobmaker", "잡메이커", ["국내", "AI 취업지원", "문서 첨삭"], "첨삭 리포트", [
+          step("서비스 진입", "entry"),
+          step("시작 조건 확인", "signup"),
+          step("문서 입력 또는 업로드", "input"),
+          step("AI 분석 실행", "ai_run"),
+          step("피드백 확인", "result"),
+          step("결과 저장/추가 신청", "export")
+        ]),
+        service("deepresume", "DeepResume", ["해외", "이력서 생성", "ATS"], "이력서/점수", [
+          step("랜딩", "entry"),
+          step("가입", "signup"),
+          step("Resume Builder 진입", "input"),
+          step("기존 이력서 업로드", "input"),
+          step("AI 분석 실행", "ai_run"),
+          step("결과/개선 제안 확인", "result"),
+          step("Export/Upgrade", "export")
+        ]),
+        service("teal", "Teal", ["해외", "이력서 빌더", "JD 매칭"], "매칭 점수/이력서", [
+          step("랜딩", "entry"),
+          step("가입", "signup"),
+          step("Resume Builder 진입", "input"),
+          step("기존 이력서 업로드", "input"),
+          step("Job Description 입력", "input"),
+          step("Match Score 확인", "result"),
+          step("개선 제안 확인", "result"),
+          step("Export/Upgrade", "export")
+        ]),
+        service("jobscan", "Jobscan", ["해외", "ATS", "JD 분석"], "ATS 점수 리포트", [
+          step("랜딩", "entry"),
+          step("가입 또는 무료 분석 시작", "signup"),
+          step("이력서 업로드", "input"),
+          step("채용공고 입력", "input"),
+          step("ATS 분석 실행", "ai_run"),
+          step("Match Report 확인", "result"),
+          step("상세 분석/유료 전환", "export")
+        ]),
+        service("rezi", "Rezi", ["해외", "이력서 생성", "AI 문장"], "PDF 이력서", [
+          step("랜딩", "entry"),
+          step("가입", "signup"),
+          step("템플릿 또는 새 이력서 선택", "input"),
+          step("경력 정보 입력", "input"),
+          step("AI 문장 생성", "ai_run"),
+          step("이력서 미리보기", "result"),
+          step("PDF 다운로드/유료 전환", "export")
+        ]),
+        service("kickresume", "Kickresume", ["해외", "이력서 생성", "포트폴리오"], "이력서/웹사이트", [
+          step("랜딩", "entry"),
+          step("가입", "signup"),
+          step("이력서 또는 웹사이트 선택", "input"),
+          step("AI Writer 실행", "ai_run"),
+          step("결과 미리보기", "result"),
+          step("포트폴리오 웹사이트 확인", "portfolio"),
+          step("다운로드/공유/유료 전환", "export")
+        ]),
+        service("cake", "Cake", ["해외", "이력서 빌더", "포트폴리오"], "이력서/프로필 링크", [
+          step("랜딩", "entry"),
+          step("가입", "signup"),
+          step("Resume Builder 진입", "input"),
+          step("프로필/포트폴리오 입력", "portfolio"),
+          step("이력서 미리보기", "result"),
+          step("공유 링크/다운로드", "export")
+        ])
+      ]
+    };
+
+    function service(id, name, tags, resultType, steps) {
+      return {
+        id,
+        name,
+        url: "",
+        tags,
+        resultType,
+        pricing: "",
+        summary: "",
+        strengths: "",
+        limits: "",
+        apply: "",
+        steps
+      };
+    }
+
+    function step(title, commonStage) {
+      return {
+        id: uid(),
+        title,
+        commonStage,
+        note: "",
+        reference: "",
+        images: []
+      };
+    }
+
+    function uid() {
+      return "id_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+    }
+
+    const storageKey = "ai_service_capture_board_v1";
+    const DB_NAME = "ai_capture_board_db";
+    const DB_STORE = "data";
+    let data = structuredClone(defaultData);
+    let activeView = "dashboard";
+    let _db = null;
+
+    function openDB() {
+      return new Promise((resolve, reject) => {
+        if (_db) { resolve(_db); return; }
+        const req = indexedDB.open(DB_NAME, 1);
+        req.onupgradeneeded = e => {
+          e.target.result.createObjectStore(DB_STORE);
+        };
+        req.onsuccess = e => { _db = e.target.result; resolve(_db); };
+        req.onerror = e => reject(e.target.error);
+      });
+    }
+
+    async function loadData() {
+      try {
+        const db = await openDB();
+        const parsed = await new Promise((resolve, reject) => {
+          const tx = db.transaction(DB_STORE, "readonly");
+          const req = tx.objectStore(DB_STORE).get(storageKey);
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+        if (parsed) {
+          parsed.services?.forEach(svc => svc.steps?.forEach(s => {
+            if (!s.images) s.images = s.image ? [s.image] : [];
+            delete s.image;
+          }));
+          return parsed;
+        }
+      } catch (err) {
+        console.warn("IndexedDB load failed, trying localStorage fallback:", err);
+        try {
+          const saved = localStorage.getItem(storageKey);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            parsed.services?.forEach(svc => svc.steps?.forEach(s => {
+              if (!s.images) s.images = s.image ? [s.image] : [];
+              delete s.image;
+            }));
+            return parsed;
+          }
+        } catch (e2) { console.warn(e2); }
+      }
+      return structuredClone(defaultData);
+    }
+
+    async function saveData() {
+      try {
+        const db = await openDB();
+        await new Promise((resolve, reject) => {
+          const tx = db.transaction(DB_STORE, "readwrite");
+          tx.objectStore(DB_STORE).put(data, storageKey);
+          tx.oncomplete = resolve;
+          tx.onerror = () => reject(tx.error);
+        });
+      } catch (err) {
+        console.error("saveData error:", err);
+        alert("저장 중 오류가 발생했습니다: " + err.message);
+      }
+      render();
+    }
+
+    function compressImage(dataUrl, maxWidth = 1200, quality = 0.82) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => {
+          let { width, height } = img;
+          if (width > maxWidth) {
+            height = Math.round(height * maxWidth / width);
+            width = maxWidth;
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL("image/jpeg", quality));
+        };
+        img.onerror = () => resolve(dataUrl);
+        img.src = dataUrl;
+      });
+    }
+
+    function selectedService() {
+      return data.services.find(s => s.id === data.selectedServiceId) || data.services[0];
+    }
+
+    function getStageName(id) {
+      return commonStages.find(s => s.id === id)?.name || id;
+    }
+
+    function imageCount(service) {
+      return service.steps.reduce((sum, s) => sum + (s.images?.length || 0), 0);
+    }
+
+    function progress(service) {
+      if (!service.steps.length) return 0;
+      return Math.round((imageCount(service) / service.steps.length) * 100);
+    }
+
+    function setView(view) {
+      activeView = view;
+      document.querySelectorAll(".view").forEach(el => el.classList.toggle("active", el.id === view));
+      document.querySelectorAll(".nav button").forEach(el => el.classList.toggle("active", el.dataset.view === view));
+      const titleMap = {
+        dashboard: "전체 요약",
+        "service-flow": "서비스별 흐름",
+        "stage-compare": "단계별 비교",
+        "output-compare": "결과물 비교",
+        strategy: "기획 적용점"
+      };
+      document.getElementById("viewTitle").textContent = titleMap[view] || "비교 보드";
+      const fab = document.getElementById("fabAddStep");
+      if (fab) fab.style.display = view === "service-flow" ? "block" : "none";
+      render();
+    }
+
+    function render() {
+      renderDashboard();
+      renderServiceList();
+      renderFlowEditor();
+      renderStageCompare();
+      renderOutputTable();
+      renderStrategyTable();
+    }
+
+    function renderDashboard() {
+      const services = filteredServices();
+      const totalSteps = data.services.reduce((sum, service) => sum + service.steps.length, 0);
+      const totalImages = data.services.reduce((sum, service) => sum + imageCount(service), 0);
+      const avgProgress = data.services.length ? Math.round(data.services.reduce((sum, service) => sum + progress(service), 0) / data.services.length) : 0;
+
+      document.getElementById("statServices").textContent = data.services.length;
+      document.getElementById("statSteps").textContent = totalSteps;
+      document.getElementById("statImages").textContent = totalImages;
+      document.getElementById("statProgress").textContent = avgProgress + "%";
+
+      const allTags = [...new Set(data.services.flatMap(service => service.tags))].sort();
+      const tagFilter = document.getElementById("tagFilter");
+      const current = tagFilter.value;
+      tagFilter.innerHTML = '<option value="">전체 유형</option>' + allTags.map(tag => `<option value="${escapeHtml(tag)}">${escapeHtml(tag)}</option>`).join("");
+      tagFilter.value = current;
+
+      document.getElementById("serviceGrid").innerHTML = services.map(service => `
+        <article class="service-card">
+          <div>
+            <h3>${escapeHtml(service.name)}</h3>
+            <div class="small-text muted">${escapeHtml(service.resultType || "결과물 미정")}</div>
+          </div>
+          <div class="tag-row">${service.tags.map(tag => `<span class="tag ${tagClass(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
+          <div>
+            <div class="small-text muted">캡처 ${imageCount(service)} / ${service.steps.length}</div>
+            <div class="progress"><span style="width:${progress(service)}%"></span></div>
+          </div>
+          <div class="small-text muted">${escapeHtml(service.summary || "요약 메모를 입력하세요.")}</div>
+          <button class="small" onclick="openService('${service.id}')">흐름 편집</button>
+        </article>
+      `).join("") || `<div class="empty-state">조건에 맞는 서비스가 없습니다.</div>`;
+    }
+
+    function filteredServices() {
+      const query = document.getElementById("serviceSearch")?.value?.trim().toLowerCase() || "";
+      const tag = document.getElementById("tagFilter")?.value || "";
+      return data.services.filter(service => {
+        const matchesQuery = !query || service.name.toLowerCase().includes(query) || service.tags.join(" ").toLowerCase().includes(query);
+        const matchesTag = !tag || service.tags.includes(tag);
+        return matchesQuery && matchesTag;
+      });
+    }
+
+    function tagClass(tag) {
+      if (tag.includes("국내") || tag.includes("기관")) return "good";
+      if (tag.includes("유료") || tag.includes("ATS")) return "warn";
+      return "blue";
+    }
+
+    function renderServiceList() {
+      const list = document.getElementById("serviceList");
+      list.innerHTML = data.services.map(service => `
+        <button class="${service.id === data.selectedServiceId ? "active" : ""}" onclick="selectService('${service.id}')">
+          <strong>${escapeHtml(service.name)}</strong>
+          <div class="small-text muted">캡처 ${imageCount(service)} / ${service.steps.length}</div>
+        </button>
+      `).join("");
+    }
+
+    function renderFlowEditor() {
+      const service = selectedService();
+      const editor = document.getElementById("flowEditor");
+      if (!service) {
+        editor.innerHTML = `<div class="empty-state">서비스를 추가하세요.</div>`;
+        return;
+      }
+
+      editor.innerHTML = `
+        <div class="editor-grid">
+          <div class="field">
+            <label>서비스명</label>
+            <input value="${escapeAttr(service.name)}" onchange="updateService('${service.id}', 'name', this.value)">
+          </div>
+          <div class="field">
+            <label>URL</label>
+            <input value="${escapeAttr(service.url || "")}" placeholder="서비스 진입 URL" onchange="updateService('${service.id}', 'url', this.value)">
+          </div>
+          <div class="field">
+            <label>유형 태그</label>
+            <input value="${escapeAttr(service.tags.join(', '))}" placeholder="예: 국내, 자소서 첨삭, ATS" onchange="updateTags('${service.id}', this.value)">
+          </div>
+          <div class="field">
+            <label>결과물 형태</label>
+            <input value="${escapeAttr(service.resultType || "")}" placeholder="예: 점수 리포트, PDF 이력서" onchange="updateService('${service.id}', 'resultType', this.value)">
+          </div>
+          <div class="field">
+            <label>무료 제공 범위/유료 전환 지점</label>
+            <textarea onchange="updateService('${service.id}', 'pricing', this.value)">${escapeHtml(service.pricing || "")}</textarea>
+          </div>
+          <div class="field">
+            <label>서비스 요약</label>
+            <textarea onchange="updateService('${service.id}', 'summary', this.value)">${escapeHtml(service.summary || "")}</textarea>
+          </div>
+        </div>
+        <div class="step-list">
+          ${service.steps.map((item, index) => stepCard(service, item, index)).join("")}
+        </div>
+      `;
+    }
+
+    function stepCard(service, item, index) {
+      return `
+        <article class="step-card" id="sc_${item.id}"
+          ondragover="stepDragOver(event, '${service.id}', '${item.id}')"
+          ondrop="stepDrop(event, '${service.id}', '${item.id}')"
+          ondragleave="stepDragLeave(event)">
+          <div class="step-meta">
+            <div class="drag-handle" draggable="true"
+              ondragstart="stepDragStart(event, '${service.id}', '${item.id}')"
+              ondragend="stepDragEnd(event)">&#9776;</div>
+            <div class="step-index">${String(index + 1).padStart(2, "0")} 단계</div>
+            <div class="field">
+              <label>단계명</label>
+              <input value="${escapeAttr(item.title)}" onchange="updateStep('${service.id}', '${item.id}', 'title', this.value)">
+            </div>
+            <div class="field">
+              <label>공통 비교 분류</label>
+              <select onchange="updateStep('${service.id}', '${item.id}', 'commonStage', this.value)">
+                ${commonStages.map(stage => `<option value="${stage.id}" ${stage.id === item.commonStage ? "selected" : ""}>${escapeHtml(stage.name)}</option>`).join("")}
+              </select>
+            </div>
+            <div class="capture-actions">
+              <button class="small danger" onclick="deleteStep('${service.id}', '${item.id}')">삭제</button>
+            </div>
+          </div>
+          <div>
+            <div class="dropzone" id="dz_${item.id}"
+              ondragover="event.preventDefault(); document.getElementById('dz_${item.id}').classList.add('drag-over')"
+              ondragleave="document.getElementById('dz_${item.id}').classList.remove('drag-over')"
+              ondrop="event.preventDefault(); document.getElementById('dz_${item.id}').classList.remove('drag-over'); dropImages('${service.id}', '${item.id}', event.dataTransfer.files)">
+              ${(item.images?.length > 0) ? `
+              <div class="image-thumb-row">
+                ${item.images.map((src, idx) => `
+                  <div class="image-thumb-wrap">
+                    <img src="${src}" alt="${escapeAttr(item.title)} ${idx + 1}" onclick="openImage('${service.id}', '${item.id}', ${idx})">
+                    <button class="thumb-remove" onclick="removeImage('${service.id}', '${item.id}', ${idx})">×</button>
+                  </div>
+                `).join("")}
+              </div>
+              ` : `<div class="capture-placeholder drop-hint">이미지를 여기로 드래그하거나 아래 버튼을 사용하세요</div>`}
+            </div>
+            <div class="capture-actions">
+              <button class="small" onclick="document.getElementById('file_${item.id}').click()">이미지 추가</button>
+              <input class="file-input" id="file_${item.id}" type="file" accept="image/*" multiple onchange="uploadImages('${service.id}', '${item.id}', this.files)">
+              <button class="small" id="paste_btn_${item.id}" onclick="setPasteTarget('${service.id}', '${item.id}')">클립보드 붙여넣기 (Ctrl+V)</button>
+            </div>
+            <div class="editor-grid" style="margin-top:10px;">
+              <div class="field">
+                <label>관찰 메모</label>
+                <textarea onchange="updateStep('${service.id}', '${item.id}', 'note', this.value)">${escapeHtml(item.note || "")}</textarea>
+              </div>
+              <div class="field">
+                <label>우리 서비스 참고점</label>
+                <textarea onchange="updateStep('${service.id}', '${item.id}', 'reference', this.value)">${escapeHtml(item.reference || "")}</textarea>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderStageCompare() {
+      const filter = document.getElementById("commonStageFilter");
+      const current = filter.value || "all";
+      filter.innerHTML = `<option value="all">전체 단계</option>${commonStages.map(stage => `<option value="${stage.id}">${escapeHtml(stage.name)}</option>`).join("")}`;
+      filter.value = current;
+
+      const stages = current === "all" ? commonStages : commonStages.filter(stage => stage.id === current);
+      const boards = stages.map(stage => {
+        const cards = data.services.map(service => {
+          const matched = service.steps.find(item => item.commonStage === stage.id);
+          return `
+            <article class="compare-card">
+              <div class="compare-card-title">${escapeHtml(service.name)}</div>
+              ${matched ? `
+                <div class="small-text muted">${escapeHtml(matched.title)}</div>
+                <div class="capture-box ${matched.images?.length ? "has-image" : ""}" onclick="${matched.images?.length ? `openImage('${service.id}', '${matched.id}', 0)` : ""}">
+                  ${matched.images?.length ? `<img src="${matched.images[0]}" alt="${escapeAttr(service.name)} ${escapeAttr(matched.title)}">` : `<div class="capture-placeholder">이미지 없음</div>`}
+                  ${matched.images?.length > 1 ? `<span class="img-count-badge">+${matched.images.length - 1}</span>` : ""}
+                </div>
+                <div class="note">${escapeHtml(matched.note || "")}</div>
+              ` : `
+                <div class="capture-box"><div class="capture-placeholder">해당 단계 없음</div></div>
+                <div class="note">이 서비스의 실제 흐름에는 이 단계가 없거나 아직 분류되지 않았습니다.</div>
+              `}
+            </article>
+          `;
+        }).join("");
+        return `
+          <section class="stage-board">
+            <div class="stage-board-header">
+              <strong>${escapeHtml(stage.name)}</strong>
+              <span class="small-text muted">서비스별 첫 번째 매칭 단계 기준</span>
+            </div>
+            <div class="horizontal-scroll">
+              <div class="compare-row">${cards}</div>
+            </div>
+          </section>
+        `;
+      }).join("");
+      document.getElementById("stageCompare").innerHTML = boards;
+    }
+
+    function renderOutputTable() {
+      document.getElementById("outputTable").innerHTML = `
+        <thead>
+          <tr>
+            <th>서비스</th>
+            <th>결과물 형태</th>
+            <th>무료 제공 범위/유료 전환 지점</th>
+            <th>강점</th>
+            <th>한계</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.services.map(service => `
+            <tr>
+              <td><strong>${escapeHtml(service.name)}</strong></td>
+              <td><textarea onchange="updateService('${service.id}', 'resultType', this.value)">${escapeHtml(service.resultType || "")}</textarea></td>
+              <td><textarea onchange="updateService('${service.id}', 'pricing', this.value)">${escapeHtml(service.pricing || "")}</textarea></td>
+              <td><textarea onchange="updateService('${service.id}', 'strengths', this.value)">${escapeHtml(service.strengths || "")}</textarea></td>
+              <td><textarea onchange="updateService('${service.id}', 'limits', this.value)">${escapeHtml(service.limits || "")}</textarea></td>
+            </tr>
+          `).join("")}
+        </tbody>
+      `;
+    }
+
+    function renderStrategyTable() {
+      document.getElementById("strategyTable").innerHTML = `
+        <thead>
+          <tr>
+            <th>서비스</th>
+            <th>참고할 점</th>
+            <th>따라 하지 말 점/한계</th>
+            <th>B2B/B2G 적용점</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.services.map(service => `
+            <tr>
+              <td><strong>${escapeHtml(service.name)}</strong></td>
+              <td><textarea onchange="updateService('${service.id}', 'strengths', this.value)">${escapeHtml(service.strengths || "")}</textarea></td>
+              <td><textarea onchange="updateService('${service.id}', 'limits', this.value)">${escapeHtml(service.limits || "")}</textarea></td>
+              <td><textarea onchange="updateService('${service.id}', 'apply', this.value)">${escapeHtml(service.apply || "")}</textarea></td>
+            </tr>
+          `).join("")}
+        </tbody>
+      `;
+    }
+
+    function selectService(id) {
+      data.selectedServiceId = id;
+      saveData();
+    }
+
+    function openService(id) {
+      data.selectedServiceId = id;
+      setView("service-flow");
+    }
+
+    function updateService(id, field, value) {
+      const service = data.services.find(item => item.id === id);
+      if (!service) return;
+      service[field] = value;
+      saveData();
+    }
+
+    function updateTags(id, value) {
+      const service = data.services.find(item => item.id === id);
+      if (!service) return;
+      service.tags = value.split(",").map(tag => tag.trim()).filter(Boolean);
+      saveData();
+    }
+
+    function updateStep(serviceId, stepId, field, value) {
+      const item = findStep(serviceId, stepId);
+      if (!item) return;
+      item[field] = value;
+      saveData();
+    }
+
+    function findStep(serviceId, stepId) {
+      const service = data.services.find(item => item.id === serviceId);
+      return service?.steps.find(item => item.id === stepId);
+    }
+
+    function addService() {
+      const name = prompt("추가할 서비스명을 입력하세요.");
+      if (!name) return;
+      const id = name.toLowerCase().replace(/[^a-z0-9가-힣]+/g, "_").replace(/^_+|_+$/g, "") + "_" + Date.now().toString(36);
+      data.services.push(service(id, name, ["조사중"], "", [
+        step("서비스 진입", "entry"),
+        step("가입 또는 시작 조건", "signup"),
+        step("입력/업로드", "input"),
+        step("AI 실행", "ai_run"),
+        step("결과 확인", "result"),
+        step("내보내기/후속 기능", "export")
+      ]));
+      data.selectedServiceId = id;
+      setView("service-flow");
+      saveData();
+    }
+
+    function addStep() {
+      const service = selectedService();
+      if (!service) return;
+      service.steps.push(step("새 단계", "etc"));
+      saveData();
+    }
+
+    function deleteStep(serviceId, stepId) {
+      const service = data.services.find(item => item.id === serviceId);
+      if (!service || !confirm("이 단계를 삭제할까요?")) return;
+      service.steps = service.steps.filter(item => item.id !== stepId);
+      saveData();
+    }
+
+    function moveStep(serviceId, stepId, direction) {
+      const service = data.services.find(item => item.id === serviceId);
+      if (!service) return;
+      const index = service.steps.findIndex(item => item.id === stepId);
+      const nextIndex = index + direction;
+      if (index < 0 || nextIndex < 0 || nextIndex >= service.steps.length) return;
+      const [item] = service.steps.splice(index, 1);
+      service.steps.splice(nextIndex, 0, item);
+      saveData();
+    }
+
+    let _pasteTarget = null;
+    let _stepDrag = null;
+
+    function stepDragStart(event, serviceId, stepId) {
+      _stepDrag = { serviceId, stepId };
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", stepId);
+      setTimeout(() => {
+        const el = document.getElementById("sc_" + stepId);
+        if (el) el.classList.add("step-dragging");
+      }, 0);
+    }
+
+    function stepDragEnd(event) {
+      if (_stepDrag) {
+        const el = document.getElementById("sc_" + _stepDrag.stepId);
+        if (el) el.classList.remove("step-dragging");
+      }
+      document.querySelectorAll(".step-card").forEach(el => {
+        el.classList.remove("drag-over-top", "drag-over-bottom");
+      });
+      _stepDrag = null;
+    }
+
+    function stepDragOver(event, serviceId, stepId) {
+      if (!_stepDrag || _stepDrag.stepId === stepId) return;
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+      const el = document.getElementById("sc_" + stepId);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const mid = rect.top + rect.height / 2;
+      el.classList.remove("drag-over-top", "drag-over-bottom");
+      if (event.clientY < mid) {
+        el.classList.add("drag-over-top");
+      } else {
+        el.classList.add("drag-over-bottom");
+      }
+    }
+
+    function stepDragLeave(event) {
+      const el = event.currentTarget;
+      el.classList.remove("drag-over-top", "drag-over-bottom");
+    }
+
+    function stepDrop(event, serviceId, stepId) {
+      event.preventDefault();
+      if (!_stepDrag || _stepDrag.stepId === stepId) return;
+      const svc = data.services.find(s => s.id === serviceId);
+      if (!svc) return;
+      const fromIdx = svc.steps.findIndex(s => s.id === _stepDrag.stepId);
+      const toEl = document.getElementById("sc_" + stepId);
+      const rect = toEl ? toEl.getBoundingClientRect() : null;
+      let toIdx = svc.steps.findIndex(s => s.id === stepId);
+      if (rect && event.clientY >= rect.top + rect.height / 2) toIdx++;
+      if (fromIdx === -1 || toIdx === -1) return;
+      const [moved] = svc.steps.splice(fromIdx, 1);
+      const insertAt = toIdx > fromIdx ? toIdx - 1 : toIdx;
+      svc.steps.splice(insertAt, 0, moved);
+      saveData();
+    }
+
+    function dropImages(serviceId, stepId, files) {
+      const imageFiles = Array.from(files).filter(f => f.type.startsWith("image/"));
+      if (!imageFiles.length) return;
+      uploadImages(serviceId, stepId, imageFiles);
+    }
+
+    function uploadImages(serviceId, stepId, files) {
+      if (!files?.length) return;
+      const item = findStep(serviceId, stepId);
+      if (!item) return;
+      const fileArr = Array.from(files);
+      let pending = fileArr.length;
+      fileArr.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+          const compressed = await compressImage(reader.result);
+          item.images.push(compressed);
+          pending--;
+          if (pending === 0) saveData();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function setPasteTarget(serviceId, stepId) {
+      _pasteTarget = { serviceId, stepId };
+      const btn = document.getElementById(`paste_btn_${stepId}`);
+      if (btn) {
+        btn.textContent = "⌨️ 지금 Ctrl+V를 누르세요";
+        btn.style.background = "#e8f4fd";
+        btn.style.borderColor = "#3b82f6";
+        setTimeout(() => {
+          _pasteTarget = null;
+          if (btn) {
+            btn.textContent = "클립보드 붙여넣기 (Ctrl+V)";
+            btn.style.background = "";
+            btn.style.borderColor = "";
+          }
+        }, 5000);
+      }
+    }
+
+    function removeImage(serviceId, stepId, index) {
+      const item = findStep(serviceId, stepId);
+      if (!item) return;
+      item.images.splice(index, 1);
+      saveData();
+    }
+
+    let _modalState = null;
+
+    function openImage(serviceId, stepId, index) {
+      const service = data.services.find(s => s.id === serviceId);
+      const item = findStep(serviceId, stepId);
+      if (!item?.images?.length) return;
+      _modalState = { serviceId, stepId, index };
+      renderModal();
+      document.getElementById("imageModal").classList.add("active");
+    }
+
+    function renderModal() {
+      if (!_modalState) return;
+      const { serviceId, stepId, index } = _modalState;
+      const service = data.services.find(s => s.id === serviceId);
+      const item = findStep(serviceId, stepId);
+      if (!item?.images?.length) return;
+      const total = item.images.length;
+      const safeIdx = Math.max(0, Math.min(index, total - 1));
+      _modalState.index = safeIdx;
+      document.getElementById("modalTitle").textContent = `${service.name} — ${item.title}${total > 1 ? ` (${safeIdx + 1}/${total})` : ""}`;
+      document.getElementById("modalImage").src = item.images[safeIdx];
+      document.getElementById("modalPrev").style.display = total > 1 && safeIdx > 0 ? "block" : "none";
+      document.getElementById("modalNext").style.display = total > 1 && safeIdx < total - 1 ? "block" : "none";
+    }
+
+    function closeModal() {
+      document.getElementById("imageModal").classList.remove("active");
+      document.getElementById("modalImage").src = "";
+      _modalState = null;
+    }
+
+    function exportJson() {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "ai_service_capture_board_backup_" + new Date().toISOString().slice(0, 10) + ".json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function importJson(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          if (!parsed.services || !Array.isArray(parsed.services)) throw new Error("invalid");
+          data = parsed;
+          saveData();
+          alert("백업을 불러왔습니다.");
+        } catch (error) {
+          alert("백업 파일을 읽지 못했습니다.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetData() {
+      if (!confirm("모든 입력 내용을 초기 상태로 되돌릴까요? 백업하지 않은 캡처와 메모는 사라집니다.")) return;
+      data = structuredClone(defaultData);
+      saveData();
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value).replaceAll("\n", " ");
+    }
+
+    document.getElementById("nav").addEventListener("click", event => {
+      const button = event.target.closest("button[data-view]");
+      if (button) setView(button.dataset.view);
+    });
+    document.getElementById("addServiceBtn").addEventListener("click", addService);
+    document.getElementById("serviceSearch").addEventListener("input", renderDashboard);
+    document.getElementById("tagFilter").addEventListener("change", renderDashboard);
+    document.getElementById("commonStageFilter").addEventListener("change", renderStageCompare);
+    document.getElementById("exportJson").addEventListener("click", exportJson);
+    document.getElementById("importJson").addEventListener("click", () => document.getElementById("importJsonInput").click());
+    document.getElementById("importJsonInput").addEventListener("change", event => importJson(event.target.files[0]));
+    document.getElementById("resetData").addEventListener("click", resetData);
+    document.getElementById("closeModal").addEventListener("click", closeModal);
+    document.getElementById("imageModal").addEventListener("click", event => {
+      if (event.target.id === "imageModal") closeModal();
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeModal();
+      if (event.key === "ArrowLeft" && _modalState) { event.preventDefault(); navigateModal(-1); }
+      if (event.key === "ArrowRight" && _modalState) { event.preventDefault(); navigateModal(1); }
+    });
+
+    document.addEventListener("paste", event => {
+      if (!_pasteTarget) return;
+      const { serviceId, stepId } = _pasteTarget;
+      _pasteTarget = null;
+      const btn = document.getElementById(`paste_btn_${stepId}`);
+      if (btn) { btn.textContent = "클립보드 붙여넣기 (Ctrl+V)"; btn.style.background = ""; btn.style.borderColor = ""; }
+      const items = Array.from(event.clipboardData?.items || []);
+      const imageItem = items.find(it => it.type.startsWith("image/"));
+      if (!imageItem) { alert("클립보드에 이미지가 없습니다."); return; }
+      uploadImages(serviceId, stepId, [imageItem.getAsFile()]);
+    });
+
+    function navigateModal(direction) {
+      if (!_modalState) return;
+      _modalState.index += direction;
+      renderModal();
+    }
+
+    async function initApp() {
+      data = await loadData();
+      render();
+    }
+    initApp();
+  </script>
+</body>
+</html>
