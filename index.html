@@ -707,13 +707,22 @@
       min-width: 0;
     }
 
-    /* 단계별 비교: 서비스별 세로 흐름 레이아웃 */
+    /* 단계별 비교: 서비스는 가로 컬럼, 각 서비스 단계는 세로 */
+    #stage-compare { --svc-col-width: 500px; }
+
     #stage-compare .compare-section {
-      display: grid;
-      gap: 22px;
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      gap: 18px;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding-bottom: 10px;
     }
 
     .svc-flow-block {
+      flex: 0 0 var(--svc-col-width);
+      width: var(--svc-col-width);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: #fff;
@@ -728,6 +737,9 @@
       padding: 14px 18px;
       border-bottom: 1px solid var(--line);
       background: #fbfcfe;
+      position: sticky;
+      top: 0;
+      z-index: 2;
     }
 
     .svc-flow-header strong { font-size: 17px; }
@@ -919,10 +931,7 @@
       .service-list { max-width: none; }
       .step-card { grid-template-columns: 1fr; }
       .editor-grid { grid-template-columns: 1fr; }
-      #stage-compare {
-        --compare-capture-width: min(86vw, 480px);
-        --compare-capture-height: min(56vw, 300px);
-      }
+      #stage-compare { --svc-col-width: min(88vw, 460px); }
     }
 
     @media print {
@@ -1030,8 +1039,8 @@
           <div class="panel">
             <div class="panel-title">
               <div>
-                <h2>서비스별 단계 세로 비교</h2>
-                <p>서비스별로 실제 흐름의 각 단계를 세로로 나열하고, 캡처 원본을 잘림 없이 크게 확인합니다. 순서는 '서비스별 흐름'에서 드래그로 바꿀 수 있습니다.</p>
+                <h2>서비스별 단계 비교</h2>
+                <p>서비스를 가로로 나란히 놓고, 각 서비스의 단계는 세로로 나열합니다. 캡처 원본을 잘림 없이 크게 확인할 수 있고, 순서는 '서비스별 흐름'에서 드래그로 바꿀 수 있습니다.</p>
               </div>
             </div>
             <div class="compare-section" id="stageCompare"></div>
