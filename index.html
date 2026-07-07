@@ -870,11 +870,11 @@
               <div class="stat-value" id="statSteps">0</div>
             </div>
             <div class="stat">
-              <div class="stat-label">등록된 캡처</div>
+              <div class="stat-label">완료 단계</div>
               <div class="stat-value" id="statImages">0</div>
             </div>
             <div class="stat">
-              <div class="stat-label">평균 캡처율</div>
+              <div class="stat-label">평균 완료율</div>
               <div class="stat-value" id="statProgress">0%</div>
             </div>
           </div>
@@ -883,7 +883,7 @@
             <div class="panel-title">
               <div>
                 <h2>서비스 요약</h2>
-                <p>조사 대상 서비스의 유형, 결과물, 캡처 진행률을 빠르게 확인합니다.</p>
+                <p>조사 대상 서비스의 유형, 결과물, 단계 완료율을 빠르게 확인합니다.</p>
               </div>
               <div class="toolbar">
                 <input id="serviceSearch" placeholder="서비스 검색">
@@ -1291,9 +1291,13 @@
       return service.steps.reduce((sum, s) => sum + (s.images?.length || 0), 0);
     }
 
+    function completedStepCount(service) {
+      return service.steps.reduce((sum, s) => sum + ((s.images?.length || 0) > 0 ? 1 : 0), 0);
+    }
+
     function progress(service) {
       if (!service.steps.length) return 0;
-      return Math.round((imageCount(service) / service.steps.length) * 100);
+      return Math.round((completedStepCount(service) / service.steps.length) * 100);
     }
 
     function setView(view) {
@@ -1342,12 +1346,12 @@
     function renderDashboard() {
       const services = filteredServices();
       const totalSteps = data.services.reduce((sum, service) => sum + service.steps.length, 0);
-      const totalImages = data.services.reduce((sum, service) => sum + imageCount(service), 0);
+      const totalCompletedSteps = data.services.reduce((sum, service) => sum + completedStepCount(service), 0);
       const avgProgress = data.services.length ? Math.round(data.services.reduce((sum, service) => sum + progress(service), 0) / data.services.length) : 0;
 
       document.getElementById("statServices").textContent = data.services.length;
       document.getElementById("statSteps").textContent = totalSteps;
-      document.getElementById("statImages").textContent = totalImages;
+      document.getElementById("statImages").textContent = totalCompletedSteps;
       document.getElementById("statProgress").textContent = avgProgress + "%";
 
       const allTags = [...new Set(data.services.flatMap(service => service.tags))].sort();
@@ -1364,7 +1368,7 @@
           </div>
           <div class="tag-row">${service.tags.map(tag => `<span class="tag ${tagClass(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
           <div>
-            <div class="small-text muted">캡처 ${imageCount(service)} / ${service.steps.length}</div>
+            <div class="small-text muted">완료 단계 ${completedStepCount(service)} / ${service.steps.length}</div>
             <div class="progress"><span style="width:${progress(service)}%"></span></div>
           </div>
           <div class="small-text muted">${escapeHtml(service.summary || "요약 메모를 입력하세요.")}</div>
