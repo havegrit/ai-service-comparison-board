@@ -1,0 +1,744 @@
+{
+  "version": 1,
+  "selectedServiceId": "saramin",
+  "services": [
+    {
+      "id": "saramin",
+      "name": "사람인 AI 서류 코칭",
+      "url": "",
+      "tags": [
+        "국내",
+        "자소서 첨삭",
+        "이력서 첨삭"
+      ],
+      "resultType": "점수/피드백",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_6ert3h7d734h",
+          "title": "서비스 진입",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_e3cu2xl8734h",
+          "title": "로그인/회원가입",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_hmdkq7z6734h",
+          "title": "이력서 또는 자소서 선택",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_q10463qd734h",
+          "title": "문서 입력/불러오기",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_y4ylg6zl734h",
+          "title": "AI 분석 실행",
+          "commonStage": "ai_run",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_yhj6qe5y734h",
+          "title": "점수/피드백 확인",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_177ze252734h",
+          "title": "수정 제안 확인",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_r9dfqxw4734h",
+          "title": "추가 기능/유료 전환",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "wanted",
+      "name": "원티드 이력서",
+      "url": "",
+      "tags": [
+        "국내",
+        "이력서 작성",
+        "프로필"
+      ],
+      "resultType": "이력서 프로필",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_8oosgg5y734h",
+          "title": "서비스 진입",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_a7lg2dpl734h",
+          "title": "로그인/회원가입",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_vongmzpu734h",
+          "title": "이력서 작성 진입",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_50b9h5jq734h",
+          "title": "경력/학력/스킬 입력",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_zox61zkv734h",
+          "title": "추천/피드백 확인",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_gf1uw1oc734h",
+          "title": "지원 또는 프로필 공개",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "jasoseol",
+      "name": "자소설닷컴",
+      "url": "",
+      "tags": [
+        "국내",
+        "자소서 작성",
+        "문항 관리"
+      ],
+      "resultType": "자소서 문항",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_qzmtb2i0734h",
+          "title": "서비스 진입",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_efy5k51v734h",
+          "title": "로그인/회원가입",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_4dhpd57d734h",
+          "title": "기업/공고 선택",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_fjq0doz6734h",
+          "title": "자소서 문항 작성",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_5t6ygb5s734h",
+          "title": "AI 또는 맞춤법 기능 실행",
+          "commonStage": "ai_run",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_1ve0rhbv734h",
+          "title": "문항별 피드백 확인",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_xd492d8d734h",
+          "title": "저장/제출 관리",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "jobmaker",
+      "name": "잡메이커",
+      "url": "",
+      "tags": [
+        "국내",
+        "AI 취업지원",
+        "문서 첨삭"
+      ],
+      "resultType": "첨삭 리포트",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_ajtrxr9f734h",
+          "title": "서비스 진입",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_upp5q824734h",
+          "title": "시작 조건 확인",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_q6ll9b94734h",
+          "title": "문서 입력 또는 업로드",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_8ug9rik3734h",
+          "title": "AI 분석 실행",
+          "commonStage": "ai_run",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_pba7hjf4734h",
+          "title": "피드백 확인",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_90yx6cml734h",
+          "title": "결과 저장/추가 신청",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "deepresume",
+      "name": "DeepResume",
+      "url": "",
+      "tags": [
+        "해외",
+        "이력서 생성",
+        "ATS"
+      ],
+      "resultType": "이력서/점수",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_4ucufgvi734i",
+          "title": "랜딩",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_cwv3ckvl734i",
+          "title": "가입",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_m3u9hby2734i",
+          "title": "Resume Builder 진입",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_39b3mxds734i",
+          "title": "기존 이력서 업로드",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_h8yk9gwc734i",
+          "title": "AI 분석 실행",
+          "commonStage": "ai_run",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_cjqmd0o4734i",
+          "title": "결과/개선 제안 확인",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_jvw36bbf734i",
+          "title": "Export/Upgrade",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "teal",
+      "name": "Teal",
+      "url": "",
+      "tags": [
+        "해외",
+        "이력서 빌더",
+        "JD 매칭"
+      ],
+      "resultType": "매칭 점수/이력서",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_l0891w7y734i",
+          "title": "랜딩",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_p4ws9m2r734i",
+          "title": "가입",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_vba9za6i734i",
+          "title": "Resume Builder 진입",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_xqufvl1i734i",
+          "title": "기존 이력서 업로드",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_p6lbw6bw734i",
+          "title": "Job Description 입력",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_jli9mmuy734i",
+          "title": "Match Score 확인",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_zxwrau6m734i",
+          "title": "개선 제안 확인",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_lsw5vz9k734i",
+          "title": "Export/Upgrade",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "jobscan",
+      "name": "Jobscan",
+      "url": "",
+      "tags": [
+        "해외",
+        "ATS",
+        "JD 분석"
+      ],
+      "resultType": "ATS 점수 리포트",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_pw3mumj8734i",
+          "title": "랜딩",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_q6jzogpz734i",
+          "title": "가입 또는 무료 분석 시작",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_hsp4mgme734i",
+          "title": "이력서 업로드",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_d15qpahw734i",
+          "title": "채용공고 입력",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_stl7257h734i",
+          "title": "ATS 분석 실행",
+          "commonStage": "ai_run",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_m8y2rztu734i",
+          "title": "Match Report 확인",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_3q0fy2jm734i",
+          "title": "상세 분석/유료 전환",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "rezi",
+      "name": "Rezi",
+      "url": "",
+      "tags": [
+        "해외",
+        "이력서 생성",
+        "AI 문장"
+      ],
+      "resultType": "PDF 이력서",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_odfn7b9y734i",
+          "title": "랜딩",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_pjbfsmaz734i",
+          "title": "가입",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_apliazf3734i",
+          "title": "템플릿 또는 새 이력서 선택",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_nhv63lnc734i",
+          "title": "경력 정보 입력",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_v80bfqlx734i",
+          "title": "AI 문장 생성",
+          "commonStage": "ai_run",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_mj4otl1v734i",
+          "title": "이력서 미리보기",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_ijn33wp6734i",
+          "title": "PDF 다운로드/유료 전환",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "kickresume",
+      "name": "Kickresume",
+      "url": "",
+      "tags": [
+        "해외",
+        "이력서 생성",
+        "포트폴리오"
+      ],
+      "resultType": "이력서/웹사이트",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_cu92dpks734i",
+          "title": "랜딩",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_k03n25ma734i",
+          "title": "가입",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_2jz0e7ek734i",
+          "title": "이력서 또는 웹사이트 선택",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_b5h20dwn734i",
+          "title": "AI Writer 실행",
+          "commonStage": "ai_run",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_1vtl76ud734i",
+          "title": "결과 미리보기",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_xgc65hno734i",
+          "title": "포트폴리오 웹사이트 확인",
+          "commonStage": "portfolio",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_jndphd40734i",
+          "title": "다운로드/공유/유료 전환",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "cake",
+      "name": "Cake",
+      "url": "",
+      "tags": [
+        "해외",
+        "이력서 빌더",
+        "포트폴리오"
+      ],
+      "resultType": "이력서/프로필 링크",
+      "pricing": "",
+      "summary": "",
+      "strengths": "",
+      "limits": "",
+      "apply": "",
+      "steps": [
+        {
+          "id": "id_isch7o1w734i",
+          "title": "랜딩",
+          "commonStage": "entry",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_1xtzfrl8734i",
+          "title": "가입",
+          "commonStage": "signup",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_gc4oqjls734i",
+          "title": "Resume Builder 진입",
+          "commonStage": "input",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_ert6rxvp734i",
+          "title": "프로필/포트폴리오 입력",
+          "commonStage": "portfolio",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_4ox35ssv734i",
+          "title": "이력서 미리보기",
+          "commonStage": "result",
+          "note": "",
+          "reference": "",
+          "images": []
+        },
+        {
+          "id": "id_np5jusl4734i",
+          "title": "공유 링크/다운로드",
+          "commonStage": "export",
+          "note": "",
+          "reference": "",
+          "images": []
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "publishedAt": "2026-07-07T03:54:04.050Z",
+    "localUpdatedAt": "2026-07-07T03:54:04.050Z",
+    "hasLocalDraft": false,
+    "source": "github-pages-snapshot"
+  }
+}

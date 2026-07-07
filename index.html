@@ -144,6 +144,16 @@
       border-color: rgba(255,255,255,.12);
     }
 
+    .sidebar-tools .publish {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .sidebar-tools .secondary {
+      background: #334155;
+    }
+
     .main {
       min-width: 0;
       display: flex;
@@ -173,6 +183,18 @@
       color: var(--muted);
       font-size: 12px;
       margin-top: 2px;
+    }
+
+    .sync-status {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 4px;
+      line-height: 1.35;
+    }
+
+    .sync-status strong {
+      color: var(--text);
+      font-weight: 700;
     }
 
     .top-actions {
@@ -813,6 +835,9 @@
         <button data-view="strategy">기획 적용점</button>
       </nav>
       <div class="sidebar-tools">
+        <button id="publishSnapshot" class="publish">게시</button>
+        <button id="refreshPublished" class="secondary">원격 새로고침</button>
+        <button id="githubTokenBtn" class="secondary">GitHub 토큰 설정</button>
         <button id="exportJson">백업 내보내기</button>
         <button id="importJson">백업 불러오기</button>
         <input class="file-input" id="importJsonInput" type="file" accept="application/json">
@@ -824,7 +849,8 @@
       <header class="topbar">
         <div>
           <div class="top-title" id="viewTitle">전체 요약</div>
-          <div class="top-sub">캡처 이미지는 이 브라우저에 저장됩니다. 중요한 작업 후에는 백업을 내보내세요.</div>
+          <div class="top-sub">URL 방문자는 게시된 스냅샷을 읽고, 편집 내용은 이 브라우저에 임시 저장됩니다.</div>
+          <div class="sync-status" id="syncStatus">데이터 상태 확인 중</div>
         </div>
         <div class="top-actions">
           <button id="addServiceBtn" class="primary">서비스 추가</button>
@@ -1088,11 +1114,25 @@
     }
 
     const storageKey = "ai_service_capture_board_v1";
+    const githubTokenKey = "ai_service_capture_board_github_token";
+    const publishedDataPath = "data.json";
+    const githubConfig = {
+      owner: "havegrit",
+      repo: "ai-service-comparison-board",
+      branch: "main",
+      path: "data.json"
+    };
     const DB_NAME = "ai_capture_board_db";
     const DB_STORE = "data";
     let data = structuredClone(defaultData);
     let activeView = "dashboard";
     let _db = null;
+    let loadState = {
+      source: "default",
+      remoteLoaded: false,
+      localDraft: false,
+      message: ""
+    };
 
     function openDB() {
       return new Promise((resolve, reject) => {
@@ -1106,7 +1146,34 @@
       });
     }
 
-    async function loadData() {
+    function normalizeData(value) {
+      const normalized = structuredClone(value && typeof value === "object" ? value : defaultData);
+      if (!Array.isArray(normalized.services)) normalized.services = [];
+      normalized.services.forEach(svc => {
+        if (!Array.isArray(svc.tags)) svc.tags = [];
+        if (!Array.isArray(svc.steps)) svc.steps = [];
+        svc.steps.forEach(item => {
+          if (!item.images) item.images = item.image ? [item.image] : [];
+          delete item.image;
+        });
+      });
+      if (!normalized.selectedServiceId && normalized.services[0]) normalized.selectedServiceId = normalized.services[0].id;
+      normalized._meta = normalized._meta && typeof normalized._meta === "object" ? normalized._meta : {};
+      return normalized;
+    }
+
+    async function fetchPublishedData() {
+      try {
+        const response = await fetch(`${publishedDataPath}?v=${Date.now()}`, { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return normalizeData(await response.json());
+      } catch (err) {
+        console.warn("published snapshot load failed:", err);
+        return null;
+      }
+    }
+
+    async function loadLocalData() {
       try {
         const db = await openDB();
         const parsed = await new Promise((resolve, reject) => {
@@ -1115,31 +1182,68 @@
           req.onsuccess = () => resolve(req.result);
           req.onerror = () => reject(req.error);
         });
-        if (parsed) {
-          parsed.services?.forEach(svc => svc.steps?.forEach(s => {
-            if (!s.images) s.images = s.image ? [s.image] : [];
-            delete s.image;
-          }));
-          return parsed;
-        }
+        if (parsed) return normalizeData(parsed);
       } catch (err) {
         console.warn("IndexedDB load failed, trying localStorage fallback:", err);
         try {
           const saved = localStorage.getItem(storageKey);
-          if (saved) {
-            const parsed = JSON.parse(saved);
-            parsed.services?.forEach(svc => svc.steps?.forEach(s => {
-              if (!s.images) s.images = s.image ? [s.image] : [];
-              delete s.image;
-            }));
-            return parsed;
-          }
+          if (saved) return normalizeData(JSON.parse(saved));
         } catch (e2) { console.warn(e2); }
       }
-      return structuredClone(defaultData);
+      return null;
     }
 
-    async function saveData() {
+    function hasLocalDraft(localData) {
+      if (!localData) return false;
+      if (!localData._meta || !("hasLocalDraft" in localData._meta)) return true;
+      return localData._meta.hasLocalDraft === true;
+    }
+
+    async function loadData() {
+      const [published, local] = await Promise.all([fetchPublishedData(), loadLocalData()]);
+      if (hasLocalDraft(local)) {
+        loadState = {
+          source: "local",
+          remoteLoaded: Boolean(published),
+          localDraft: true,
+          message: published ? "로컬 편집본 사용 중" : "로컬 편집본 사용 중, 원격 스냅샷 없음"
+        };
+        return local;
+      }
+      if (published) {
+        loadState = {
+          source: "published",
+          remoteLoaded: true,
+          localDraft: false,
+          message: "게시된 스냅샷 사용 중"
+        };
+        return published;
+      }
+      if (local) {
+        loadState = {
+          source: "local",
+          remoteLoaded: false,
+          localDraft: false,
+          message: "저장된 로컬 데이터 사용 중"
+        };
+        return local;
+      }
+      loadState = {
+        source: "default",
+        remoteLoaded: false,
+        localDraft: false,
+        message: "기본 템플릿 사용 중"
+      };
+      return normalizeData(defaultData);
+    }
+
+    async function saveData(options = {}) {
+      const contentChange = options.contentChange !== false;
+      data = normalizeData(data);
+      data._meta.localUpdatedAt = new Date().toISOString();
+      if (contentChange) data._meta.hasLocalDraft = true;
+      loadState.localDraft = data._meta.hasLocalDraft === true;
+      loadState.source = loadState.localDraft ? "local" : loadState.source;
       try {
         const db = await openDB();
         await new Promise((resolve, reject) => {
@@ -1210,12 +1314,29 @@
     }
 
     function render() {
+      renderSyncStatus();
       renderDashboard();
       renderServiceList();
       renderFlowEditor();
       renderStageCompare();
       renderOutputTable();
       renderStrategyTable();
+    }
+
+    function renderSyncStatus() {
+      const el = document.getElementById("syncStatus");
+      if (!el) return;
+      const tokenReady = Boolean(localStorage.getItem(githubTokenKey));
+      const publishedAt = data._meta?.publishedAt ? new Date(data._meta.publishedAt).toLocaleString("ko-KR") : "게시 기록 없음";
+      const localAt = data._meta?.localUpdatedAt ? new Date(data._meta.localUpdatedAt).toLocaleString("ko-KR") : "";
+      const draftText = data._meta?.hasLocalDraft ? "로컬 편집본 있음" : "게시본과 동기화됨";
+      el.innerHTML = `
+        <strong>${escapeHtml(draftText)}</strong>
+        <span> · ${escapeHtml(loadState.message || "상태 확인 완료")}</span>
+        <span> · 게시: ${escapeHtml(publishedAt)}</span>
+        ${localAt ? `<span> · 로컬 저장: ${escapeHtml(localAt)}</span>` : ""}
+        <span> · GitHub 토큰: ${tokenReady ? "설정됨" : "미설정"}</span>
+      `;
     }
 
     function renderDashboard() {
@@ -1471,7 +1592,7 @@
 
     function selectService(id) {
       data.selectedServiceId = id;
-      saveData();
+      saveData({ contentChange: false });
     }
 
     function openService(id) {
@@ -1716,6 +1837,123 @@
       reader.readAsText(file);
     }
 
+    function setGithubToken() {
+      const existing = localStorage.getItem(githubTokenKey) || "";
+      const token = prompt(
+        "GitHub fine-grained token을 입력하세요. 이 브라우저 localStorage에만 저장됩니다. 빈 값으로 저장하면 기존 토큰을 삭제합니다.",
+        existing
+      );
+      if (token === null) return;
+      const trimmed = token.trim();
+      if (trimmed) {
+        localStorage.setItem(githubTokenKey, trimmed);
+        alert("GitHub 토큰을 저장했습니다.");
+      } else {
+        localStorage.removeItem(githubTokenKey);
+        alert("GitHub 토큰을 삭제했습니다.");
+      }
+      render();
+    }
+
+    function requireGithubToken() {
+      let token = localStorage.getItem(githubTokenKey);
+      if (token) return token;
+      token = prompt("게시하려면 GitHub fine-grained token이 필요합니다. repo Contents: Read and write 권한이 있는 토큰을 입력하세요.");
+      if (!token || !token.trim()) throw new Error("GitHub 토큰이 없습니다.");
+      token = token.trim();
+      localStorage.setItem(githubTokenKey, token);
+      return token;
+    }
+
+    function base64EncodeUtf8(value) {
+      const bytes = new TextEncoder().encode(value);
+      let binary = "";
+      bytes.forEach(byte => { binary += String.fromCharCode(byte); });
+      return btoa(binary);
+    }
+
+    async function getGithubFile(token) {
+      const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
+      const response = await fetch(url, {
+        headers: {
+          "Accept": "application/vnd.github+json",
+          "Authorization": `Bearer ${token}`,
+          "X-GitHub-Api-Version": "2022-11-28"
+        }
+      });
+      if (response.status === 404) return null;
+      if (!response.ok) throw new Error(`GitHub 파일 조회 실패: HTTP ${response.status}`);
+      return response.json();
+    }
+
+    async function publishSnapshot() {
+      try {
+        const token = requireGithubToken();
+        const now = new Date().toISOString();
+        const snapshot = normalizeData(data);
+        snapshot._meta = {
+          ...snapshot._meta,
+          publishedAt: now,
+          localUpdatedAt: now,
+          hasLocalDraft: false,
+          source: "github-pages-snapshot"
+        };
+        const current = await getGithubFile(token);
+        const body = {
+          message: `Publish AI service comparison snapshot ${now.slice(0, 10)}`,
+          content: base64EncodeUtf8(JSON.stringify(snapshot, null, 2) + "\n"),
+          branch: githubConfig.branch
+        };
+        if (current?.sha) body.sha = current.sha;
+
+        const response = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
+          method: "PUT",
+          headers: {
+            "Accept": "application/vnd.github+json",
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "X-GitHub-Api-Version": "2022-11-28"
+          },
+          body: JSON.stringify(body)
+        });
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(`GitHub 게시 실패: HTTP ${response.status} ${text.slice(0, 300)}`);
+        }
+
+        data = snapshot;
+        loadState = {
+          source: "published",
+          remoteLoaded: true,
+          localDraft: false,
+          message: "방금 게시 완료"
+        };
+        await saveData({ contentChange: false });
+        alert("게시가 완료됐습니다. GitHub Pages 반영에는 보통 수십 초 정도 걸립니다.");
+      } catch (error) {
+        console.error(error);
+        alert(error.message || "게시 중 오류가 발생했습니다.");
+      }
+    }
+
+    async function refreshPublishedData() {
+      if (data._meta?.hasLocalDraft && !confirm("로컬 편집본이 있습니다. 게시된 원격 스냅샷으로 덮어쓸까요?")) return;
+      const published = await fetchPublishedData();
+      if (!published) {
+        alert("게시된 data.json을 불러오지 못했습니다.");
+        return;
+      }
+      data = published;
+      data._meta.hasLocalDraft = false;
+      loadState = {
+        source: "published",
+        remoteLoaded: true,
+        localDraft: false,
+        message: "원격 스냅샷 새로고침 완료"
+      };
+      await saveData({ contentChange: false });
+    }
+
     function resetData() {
       if (!confirm("모든 입력 내용을 초기 상태로 되돌릴까요? 백업하지 않은 캡처와 메모는 사라집니다.")) return;
       data = structuredClone(defaultData);
@@ -1743,6 +1981,9 @@
     document.getElementById("serviceSearch").addEventListener("input", renderDashboard);
     document.getElementById("tagFilter").addEventListener("change", renderDashboard);
     document.getElementById("commonStageFilter").addEventListener("change", renderStageCompare);
+    document.getElementById("publishSnapshot").addEventListener("click", publishSnapshot);
+    document.getElementById("refreshPublished").addEventListener("click", refreshPublishedData);
+    document.getElementById("githubTokenBtn").addEventListener("click", setGithubToken);
     document.getElementById("exportJson").addEventListener("click", exportJson);
     document.getElementById("importJson").addEventListener("click", () => document.getElementById("importJsonInput").click());
     document.getElementById("importJsonInput").addEventListener("change", event => importJson(event.target.files[0]));
