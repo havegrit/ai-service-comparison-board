@@ -707,31 +707,115 @@
       min-width: 0;
     }
 
-    #stage-compare {
-      --compare-capture-width: 480px;
-      --compare-capture-height: 300px;
+    /* 단계별 비교: 서비스별 세로 흐름 레이아웃 */
+    #stage-compare .compare-section {
+      display: grid;
+      gap: 22px;
     }
 
-    #stage-compare .horizontal-scroll {
-      padding: 16px;
+    .svc-flow-block {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
     }
 
-    #stage-compare .compare-row {
-      grid-auto-columns: var(--compare-capture-width);
-      gap: 16px;
+    .svc-flow-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfe;
     }
 
-    #stage-compare .compare-card {
-      padding: 12px;
+    .svc-flow-header strong { font-size: 17px; }
+
+    .svc-step-list {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .svc-step-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 14px;
+      display: grid;
       gap: 10px;
     }
 
-    #stage-compare .compare-card-title {
-      font-size: 15px;
+    .svc-step-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    #stage-compare .compare-card .capture-box {
-      height: var(--compare-capture-height);
+    .svc-step-title { font-weight: 730; font-size: 15px; }
+
+    .stage-chip {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 9px;
+    }
+
+    .svc-capture-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .svc-capture {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #0b1220;
+      overflow: hidden;
+      cursor: zoom-in;
+      position: relative;
+      display: block;
+    }
+
+    .svc-capture img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .svc-capture.no-image {
+      background: #f8fafc;
+      color: var(--muted);
+      cursor: default;
+      padding: 30px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    /* 서비스 목록 드래그 정렬 */
+    .service-list button {
+      position: relative;
+      cursor: grab;
+      padding-right: 26px;
+    }
+    .service-list button.dragging { opacity: 0.45; cursor: grabbing; }
+    .service-list button.drop-target {
+      border-color: var(--primary);
+      box-shadow: inset 0 0 0 2px var(--primary);
+    }
+    .drag-handle {
+      position: absolute;
+      right: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1;
+      user-select: none;
     }
 
     .note {
@@ -946,11 +1030,8 @@
           <div class="panel">
             <div class="panel-title">
               <div>
-                <h2>공통 단계별 가로 비교</h2>
-                <p>서비스별 실제 단계 중 공통 분류가 같은 캡처를 모아 가로로 비교합니다.</p>
-              </div>
-              <div class="toolbar">
-                <select id="commonStageFilter"></select>
+                <h2>서비스별 단계 세로 비교</h2>
+                <p>서비스별로 실제 흐름의 각 단계를 세로로 나열하고, 캡처 원본을 잘림 없이 크게 확인합니다. 순서는 '서비스별 흐름'에서 드래그로 바꿀 수 있습니다.</p>
               </div>
             </div>
             <div class="compare-section" id="stageCompare"></div>
@@ -1427,8 +1508,9 @@
     function renderServiceList() {
       const list = document.getElementById("serviceList");
       list.innerHTML = data.services.map(service => `
-        <button class="${service.id === data.selectedServiceId ? "active" : ""}" onclick="selectService('${service.id}')">
+        <button class="${service.id === data.selectedServiceId ? "active" : ""}" draggable="true" data-service-id="${service.id}" onclick="selectService('${service.id}')">
           <strong>${escapeHtml(service.name)}</strong>
+          <span class="drag-handle" title="드래그로 순서 변경">⠿</span>
         </button>
       `).join("");
     }
@@ -1536,45 +1618,44 @@
     }
 
     function renderStageCompare() {
-      const filter = document.getElementById("commonStageFilter");
-      const current = filter.value || "all";
-      filter.innerHTML = `<option value="all">전체 단계</option>${commonStages.map(stage => `<option value="${stage.id}">${escapeHtml(stage.name)}</option>`).join("")}`;
-      filter.value = current;
-
-      const stages = current === "all" ? commonStages : commonStages.filter(stage => stage.id === current);
-      const boards = stages.map(stage => {
-        const cards = data.services.map(service => {
-          const matched = service.steps.find(item => item.commonStage === stage.id);
+      const container = document.getElementById("stageCompare");
+      if (!data.services.length) {
+        container.innerHTML = `<div class="empty-state">서비스를 추가하세요.</div>`;
+        return;
+      }
+      container.innerHTML = data.services.map(service => {
+        const steps = service.steps || [];
+        const stepCards = steps.map((item, idx) => {
+          const hasImg = item.images?.length;
+          const stageName = item.commonStage ? getStageName(item.commonStage) : "";
+          const captures = hasImg
+            ? item.images.map((src, i) => `
+                <div class="svc-capture" onclick="openImage('${service.id}', '${item.id}', ${i})">
+                  <img src="${src}" alt="${escapeAttr(service.name)} ${escapeAttr(item.title)}">
+                </div>`).join("")
+            : `<div class="svc-capture no-image">캡처 없음</div>`;
           return `
-            <article class="compare-card">
-              <div class="compare-card-title">${escapeHtml(service.name)}</div>
-              ${matched ? `
-                <div class="small-text muted">${escapeHtml(matched.title)}</div>
-                <div class="capture-box ${matched.images?.length ? "has-image" : ""}" onclick="${matched.images?.length ? `openImage('${service.id}', '${matched.id}', 0)` : ""}">
-                  ${matched.images?.length ? `<img src="${matched.images[0]}" alt="${escapeAttr(service.name)} ${escapeAttr(matched.title)}">` : `<div class="capture-placeholder">이미지 없음</div>`}
-                  ${matched.images?.length > 1 ? `<span class="img-count-badge">+${matched.images.length - 1}</span>` : ""}
-                </div>
-                <div class="note">${escapeHtml(matched.note || "")}</div>
-              ` : `
-                <div class="capture-box"><div class="capture-placeholder">해당 단계 없음</div></div>
-                <div class="note">이 서비스의 실제 흐름에는 이 단계가 없거나 아직 분류되지 않았습니다.</div>
-              `}
+            <article class="svc-step-card">
+              <div class="svc-step-head">
+                <span class="step-index">STEP ${idx + 1}</span>
+                <span class="svc-step-title">${escapeHtml(item.title)}</span>
+                ${stageName ? `<span class="stage-chip">${escapeHtml(stageName)}</span>` : ""}
+              </div>
+              <div class="svc-capture-stack">${captures}</div>
+              ${item.note ? `<div class="note">${escapeHtml(item.note)}</div>` : ""}
             </article>
           `;
         }).join("");
         return `
-          <section class="stage-board">
-            <div class="stage-board-header">
-              <strong>${escapeHtml(stage.name)}</strong>
-              <span class="small-text muted">서비스별 첫 번째 매칭 단계 기준</span>
+          <section class="svc-flow-block">
+            <div class="svc-flow-header">
+              <strong>${escapeHtml(service.name)}</strong>
+              <span class="small-text muted">${completedStepCount(service)} / ${steps.length} 단계 완료</span>
             </div>
-            <div class="horizontal-scroll">
-              <div class="compare-row">${cards}</div>
-            </div>
+            <div class="svc-step-list">${stepCards || `<div class="empty-state">등록된 단계가 없습니다.</div>`}</div>
           </section>
         `;
       }).join("");
-      document.getElementById("stageCompare").innerHTML = boards;
     }
 
     function renderOutputTable() {
@@ -2012,10 +2093,49 @@
       const button = event.target.closest("button[data-view]");
       if (button) setView(button.dataset.view);
     });
+
+    // 서비스 목록 드래그 정렬 (순서는 저장되어 모든 화면에 반영됨)
+    let _dragServiceId = null;
+    const serviceListEl = document.getElementById("serviceList");
+    serviceListEl.addEventListener("dragstart", event => {
+      const btn = event.target.closest("button[data-service-id]");
+      if (!btn) return;
+      _dragServiceId = btn.dataset.serviceId;
+      btn.classList.add("dragging");
+      event.dataTransfer.effectAllowed = "move";
+    });
+    serviceListEl.addEventListener("dragover", event => {
+      if (!_dragServiceId) return;
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+      const btn = event.target.closest("button[data-service-id]");
+      serviceListEl.querySelectorAll("button").forEach(b => b.classList.remove("drop-target"));
+      if (btn && btn.dataset.serviceId !== _dragServiceId) btn.classList.add("drop-target");
+    });
+    serviceListEl.addEventListener("drop", event => {
+      event.preventDefault();
+      const btn = event.target.closest("button[data-service-id]");
+      if (!_dragServiceId || !btn) return;
+      const fromId = _dragServiceId;
+      const toId = btn.dataset.serviceId;
+      if (fromId !== toId) {
+        const arr = data.services;
+        const fromIdx = arr.findIndex(s => s.id === fromId);
+        const toIdx = arr.findIndex(s => s.id === toId);
+        if (fromIdx > -1 && toIdx > -1) {
+          const [moved] = arr.splice(fromIdx, 1);
+          arr.splice(toIdx, 0, moved);
+          saveData();
+        }
+      }
+    });
+    serviceListEl.addEventListener("dragend", () => {
+      _dragServiceId = null;
+      serviceListEl.querySelectorAll("button").forEach(b => b.classList.remove("drop-target", "dragging"));
+    });
     document.getElementById("addServiceBtn").addEventListener("click", addService);
     document.getElementById("serviceSearch").addEventListener("input", renderDashboard);
     document.getElementById("tagFilter").addEventListener("change", renderDashboard);
-    document.getElementById("commonStageFilter").addEventListener("change", renderStageCompare);
     document.getElementById("publishSnapshot").addEventListener("click", publishSnapshot);
     document.getElementById("refreshPublished").addEventListener("click", refreshPublishedData);
     document.getElementById("githubTokenBtn").addEventListener("click", setGithubToken);
