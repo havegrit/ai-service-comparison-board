@@ -1273,7 +1273,6 @@
       list.innerHTML = data.services.map(service => `
         <button class="${service.id === data.selectedServiceId ? "active" : ""}" onclick="selectService('${service.id}')">
           <strong>${escapeHtml(service.name)}</strong>
-          <div class="small-text muted">캡처 ${imageCount(service)} / ${service.steps.length}</div>
         </button>
       `).join("");
     }
