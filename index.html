@@ -948,6 +948,43 @@
       .panel, .stage-board { box-shadow: none; break-inside: avoid; }
       body { background: white; }
     }
+
+    .briefing-block {
+      display: grid;
+      gap: 8px;
+    }
+
+    .briefing-block-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .briefing-label {
+      font-weight: 700;
+      font-size: 13px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    .briefing-label.blue { color: #1d4ed8; background: var(--primary-soft); border-color: #c9dafd; }
+    .briefing-label.green { color: var(--green); background: #e9f8f3; border-color: #cceadf; }
+    .briefing-label.amber { color: var(--amber); background: #fff5e3; border-color: #f3dfb8; }
+
+    .briefing-hint {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    #briefing textarea {
+      min-height: unset;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
   </style>
 </head>
 <body>
@@ -963,6 +1000,7 @@
         <button data-view="stage-compare">단계별 비교</button>
         <button data-view="output-compare">결과물 비교</button>
         <button data-view="strategy">기획 적용점</button>
+        <button data-view="briefing">브리핑 보고</button>
       </nav>
       <div class="sidebar-tools">
         <button id="publishSnapshot" class="publish">게시</button>
@@ -1080,6 +1118,54 @@
             </div>
           </div>
         </section>
+
+        <section id="briefing" class="view">
+          <div class="panel">
+            <div class="panel-title">
+              <div>
+                <h2>브리핑 보고</h2>
+                <p>의사결정권자 대상 핵심 보고 자료입니다. 작성 내용은 자동 저장됩니다.</p>
+              </div>
+              <button class="small" onclick="copyBriefingText()">텍스트 복사</button>
+            </div>
+            <div style="display:grid;gap:16px;">
+
+              <div class="briefing-block">
+                <div class="briefing-block-header">
+                  <span class="briefing-label blue">결론 / 제안</span>
+                  <span class="briefing-hint">우리가 가야 할 방향을 한 문장으로</span>
+                </div>
+                <textarea id="bf-conclusion" rows="4" placeholder="예) AI 이력서 서비스 시장에서 차별화하려면 B2B 기관 채널과 결과물 품질 검증 기능에 집중해야 합니다." oninput="saveBriefing()"></textarea>
+              </div>
+
+              <div class="briefing-block">
+                <div class="briefing-block-header">
+                  <span class="briefing-label green">근거</span>
+                  <span class="briefing-hint">시장 조사에서 발견한 핵심 패턴 3가지</span>
+                </div>
+                <textarea id="bf-evidence" rows="6" placeholder="1. &#10;2. &#10;3. " oninput="saveBriefing()"></textarea>
+              </div>
+
+              <div class="briefing-block">
+                <div class="briefing-block-header">
+                  <span class="briefing-label amber">의사결정 포인트</span>
+                  <span class="briefing-hint">대표님이 선택해야 할 사항들</span>
+                </div>
+                <textarea id="bf-decision" rows="5" placeholder="예) ① B2C vs B2B 중 초기 타깃 선택&#10;② MVP에 포함할 핵심 기능 범위&#10;③ 유료 전환 시점 및 방식" oninput="saveBriefing()"></textarea>
+              </div>
+
+              <div class="briefing-block">
+                <div class="briefing-block-header">
+                  <span class="briefing-label">참고</span>
+                  <span class="briefing-hint">세부 비교 자료 및 출처 (필요 시 공유)</span>
+                </div>
+                <textarea id="bf-reference" rows="3" placeholder="서비스별 상세 비교 보드 — 단계별 비교, 결과물 비교, 기획 적용점 탭 참고" oninput="saveBriefing()"></textarea>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
       </section>
     </main>
   </div>
@@ -1436,12 +1522,45 @@
         "service-flow": "서비스별 흐름",
         "stage-compare": "단계별 비교",
         "output-compare": "결과물 비교",
-        strategy: "기획 적용점"
+        strategy: "기획 적용점",
+        briefing: "브리핑 보고"
       };
       document.getElementById("viewTitle").textContent = titleMap[view] || "비교 보드";
       const fab = document.getElementById("fabAddStep");
       if (fab) fab.style.display = view === "service-flow" ? "block" : "none";
+      if (view === "briefing") loadBriefing();
       render();
+    }
+
+    function saveBriefing() {
+      const data = {
+        conclusion: document.getElementById("bf-conclusion").value,
+        evidence: document.getElementById("bf-evidence").value,
+        decision: document.getElementById("bf-decision").value,
+        reference: document.getElementById("bf-reference").value,
+      };
+      localStorage.setItem("briefing-data", JSON.stringify(data));
+    }
+
+    function loadBriefing() {
+      try {
+        const data = JSON.parse(localStorage.getItem("briefing-data") || "{}");
+        if (data.conclusion !== undefined) document.getElementById("bf-conclusion").value = data.conclusion;
+        if (data.evidence !== undefined) document.getElementById("bf-evidence").value = data.evidence;
+        if (data.decision !== undefined) document.getElementById("bf-decision").value = data.decision;
+        if (data.reference !== undefined) document.getElementById("bf-reference").value = data.reference;
+      } catch {}
+    }
+
+    function copyBriefingText() {
+      const sections = [
+        ["결론 / 제안", document.getElementById("bf-conclusion").value],
+        ["근거", document.getElementById("bf-evidence").value],
+        ["의사결정 포인트", document.getElementById("bf-decision").value],
+        ["참고", document.getElementById("bf-reference").value],
+      ];
+      const text = sections.map(([title, val]) => `[${title}]\n${val || "(미작성)"}`).join("\n\n");
+      navigator.clipboard.writeText(text).then(() => alert("클립보드에 복사됐습니다."));
     }
 
     function render() {
