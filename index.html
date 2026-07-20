@@ -1000,7 +1000,6 @@
         <button data-view="stage-compare">단계별 비교</button>
         <button data-view="output-compare">결과물 비교</button>
         <button data-view="strategy">기획 적용점</button>
-        <button data-view="briefing">브리핑 보고</button>
         <button data-view="interview">AI 면접 플랫폼</button>
       </nav>
       <div class="sidebar-tools">
@@ -1120,49 +1119,6 @@
           </div>
         </section>
 
-        <section id="briefing" class="view">
-          <div class="panel">
-            <div class="panel-title">
-              <div>
-                <h2>브리핑 보고</h2>
-                <p>AI 이력서·포트폴리오 서비스 경쟁사 시장조사 브리핑 자료입니다.</p>
-              </div>
-              <button class="small" onclick="copyBriefingText()">텍스트 복사</button>
-            </div>
-            <div style="display:grid;gap:16px;">
-
-              <div class="briefing-block">
-                <div class="briefing-block-header">
-                  <span class="briefing-label blue">결론 / 제안</span>
-                </div>
-                <textarea id="bf-conclusion" rows="4" placeholder="예) AI 이력서 서비스 시장에서 차별화하려면 B2B 기관 채널과 결과물 품질 검증 기능에 집중해야 합니다." oninput="saveBriefing()"></textarea>
-              </div>
-
-              <div class="briefing-block">
-                <div class="briefing-block-header">
-                  <span class="briefing-label green">근거</span>
-                </div>
-                <textarea id="bf-evidence" rows="6" placeholder="1. &#10;2. &#10;3. " oninput="saveBriefing()"></textarea>
-              </div>
-
-              <div class="briefing-block">
-                <div class="briefing-block-header">
-                  <span class="briefing-label amber">의사결정 포인트</span>
-                </div>
-                <textarea id="bf-decision" rows="5" placeholder="예) ① B2C vs B2B 중 초기 타깃 선택&#10;② MVP에 포함할 핵심 기능 범위&#10;③ 유료 전환 시점 및 방식" oninput="saveBriefing()"></textarea>
-              </div>
-
-              <div class="briefing-block">
-                <div class="briefing-block-header">
-                  <span class="briefing-label">참고</span>
-                </div>
-                <textarea id="bf-reference" rows="3" placeholder="서비스별 상세 비교 보드 — 단계별 비교, 결과물 비교, 기획 적용점 탭 참고" oninput="saveBriefing()"></textarea>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
         <section id="interview" class="view">
           <div class="panel">
             <div class="panel-title">
@@ -1181,54 +1137,68 @@
                     <thead>
                       <tr style="background:var(--bg-secondary,#f4f4f5);text-align:left;">
                         <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">서비스</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">주요 기능</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">차별점</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);white-space:nowrap;">유형</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">핵심 기능</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">강점</th>
                         <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">가격</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">B2B/B2G</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);white-space:nowrap;">B2B/B2G</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">우리 서비스 적용 포인트</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">에듀스<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://educe.co.kr" target="_blank" style="color:#888;">educe.co.kr</a> / <a href="https://inface.ai" target="_blank" style="color:#888;">inface.ai</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">hybrid</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">AI 면접 7종 (대화형/자소서기반/기업맞춤형 등), 자소서·인적성·합격예측 통합</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">국내 대표 종합 취업 플랫폼, 기업 도입 사례 보유</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">부분 무료 + 유료</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef9c3;color:#854d0e;padding:2px 6px;border-radius:4px;font-size:11px;">⚠️ inface.ai 일부 진입함</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef9c3;color:#854d0e;padding:2px 6px;border-radius:4px;font-size:11px;">⚠️ 일부 진입</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">기관 도입 레퍼런스 참고. inface.ai가 B2B 진입 중 — 포지션 겹침 주의</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">meFit<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://mefit.kr" target="_blank" style="color:#888;">mefit.kr</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">이력서 기반 AI 질문 생성, 시선추적 + 표정분석, 영역별 점수 리포트</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">비언어 분석(시선·표정) 특화</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">유료</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">비언어 분석 기능은 차별화 요소 — B2G 교육기관에 매력적일 수 있음</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">면접톡<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://interviewtalk.kr" target="_blank" style="color:#888;">interviewtalk.kr</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">채용공고 URL 입력 → 맞춤 질문 자동 생성, 답변 녹화와 AI 피드백 제공, 취업·입시 모두 지원</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">완전 무료, 취업과 입시를 함께 지원</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">무료</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">JD 기반 질문 생성 플로우 — 핵심 UX 패턴으로 참고</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Wantive<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://wantive.cloud" target="_blank" style="color:#888;">wantive.cloud</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">삼성·카카오·네이버 등 57개 기업 맞춤 질문, 이력서 기반 AI 분석 리포트, 입시 면접 지원</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기업별 질문 DB 보유</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">회당 결제 · 30일<br><span style="font-size:11px;color:#888;">1회 ₩1,500 / 5회 ₩6,500 / 10회 ₩12,000</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">기업별 질문 DB 모델 — 기관용으로 확장 가능한 구조</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">사람인 AI 면접 연습<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://saramin.co.kr" target="_blank" style="color:#888;">saramin.co.kr</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">hybrid</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">실제 기업 채용 기준 반영 모의면접, 직무 역량 키워드 분석, AI 피드백</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">채용 플랫폼 연동 (실제 공고 데이터)</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">무료 (계정 필요)</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">채용 공고 데이터 연동 강점 — 우리는 기관 공고 연동으로 차별화 가능</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;font-weight:600;">하이잡 (HiJob)<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.haijob.co.kr" target="_blank" style="color:#888;">haijob.co.kr</a></span></td>
+                        <td style="padding:10px 12px;"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;">직무별 맞춤 질문, 답변 피드백, 신입 취준생 특화 콘텐츠</td>
                         <td style="padding:10px 12px;">직관적 UI, 신입 친화적</td>
                         <td style="padding:10px 12px;">유료</td>
                         <td style="padding:10px 12px;"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;font-size:12px;color:#555;">신입 특화 UX — 대학/취업지원기관 대상 기관 솔루션에 응용 가능</td>
                       </tr>
                     </tbody>
                   </table>
@@ -1242,89 +1212,113 @@
                     <thead>
                       <tr style="background:var(--bg-secondary,#f4f4f5);text-align:left;">
                         <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">서비스</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">주요 기능</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">특화 영역</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);white-space:nowrap;">유형</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">핵심 기능</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">강점</th>
                         <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">가격</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">B2B/기관</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);white-space:nowrap;">B2B/기관</th>
+                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">우리 서비스 적용 포인트</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr style="background:#f0fdf4;">
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">StandOut ⭐<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://standout.com" target="_blank" style="color:#888;">standout.com</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">200+ 업종 / 900+ 면접, 고용주·대학 제공 실제 질문 활용, AI 언어 피드백</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">대학 커리어센터용 B2B에 특화된 해외 사례</td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">대학 커리어센터 B2B 특화 — 국내 공백 포지션의 해외 벤치마크</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기관 라이선스</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 6px;border-radius:4px;font-size:11px;">✅ 대학 B2B에 안착</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;"><strong>가장 직접적인 벤치마크.</strong> 국내 교육기관 허브 포지션이 비어 있음</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Interviews by AI<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.interviewsby.ai" target="_blank" style="color:#888;">interviewsby.ai</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">JD 입력 → 역할에 맞는 질문 생성, 음성/텍스트 답변 연습, 바로 AI 코칭과 개선 답안 제공</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">순수 연습형으로, 조사 범위에 가장 잘 맞는 후보</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Basic $0 (3 questions/mo, 제한적 무료) / Pro $9/월</td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Basic $0 (3 questions/mo) / Pro $9/월</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">프리미엄 전환 구조(무료→Pro) 참고. JD 기반 질문 흐름이 표준 패턴</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">InterviewAI<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.interviewai.io" target="_blank" style="color:#888;">interviewai.io</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">hybrid</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">테스트 모드 / 연습 모드, AI 채점, 상황에 맞는 후속 질문, 지원자 연습과 채용담당자·기관용 흐름</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기관·회사용 기능과 개인 연습을 함께 묶은 하이브리드</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Pilot $99/mo (50 credits) / Growth $299/mo (150 credits) / Scale $799/mo (500 credits)</td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Pilot $99/mo / Growth $299/mo / Scale $799/mo</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:4px;font-size:11px;">⚠️ hybrid</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">기관용 크레딧 모델 — B2G 도입 시 과금 구조 참고</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">AI Interview Agents<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.aiinterviewagents.com" target="_blank" style="color:#888;">aiinterviewagents.com</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">hybrid</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">AI 기반 영상 면접, 구조화된 연습, 성과 분석, 채용담당자용 스크리닝</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">채용용 화면과 연습용 화면을 함께 제공하는 하이브리드</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">공개 가격 미확인</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:4px;font-size:11px;">⚠️ hybrid</span></td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Wonsulting<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.wonsulting.com" target="_blank" style="color:#888;">wonsulting.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">구직 도구, 커리어 코칭, 이력서·LinkedIn 수정, 지원 대행, 면접 준비</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">면접 전용이라기보다 잡서치·커리어 허브에 가까움</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">코칭/패키지형 (공개 가격 다양)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">허브형</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">채용 스크리닝 기능 — B2B HR 도구로의 확장 가능성 관찰</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Revarta<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://revarta.com" target="_blank" style="color:#888;">revarta.com</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">전직 FAANG 면접관 튜닝 피드백, 행동면접(STAR) 특화, 발화 분석(속도·습관어)</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">행동면접 코칭 품질 — 칭찬이 아닌 솔직한 피드백</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">무료 1문항 / $39/월</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">STAR 구조 피드백 + 발화 분석 — 고품질 피드백 기준으로 참고</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Yoodli AI<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://yoodli.ai" target="_blank" style="color:#888;">yoodli.ai</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">스피치 분석 — 습관어·말속도·아이컨택·포즈 측정, 역할별 시나리오</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">비언어·스피치 품질 특화</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">$9/월</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">스피치 지표 시각화 — 리포트 설계 참고</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Huru AI<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://huru.ai" target="_blank" style="color:#888;">huru.ai</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">영상 시뮬레이션, 바디랭귀지 분석, 답변 내용 피드백</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">바디랭귀지·영상 분석</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">$24.99/월</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">영상 기반 분석 기능 — 고도화 단계에서 참고</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Pramp<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://pramp.com" target="_blank" style="color:#888;">pramp.com</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">구직자끼리 짝을 이뤄 모의면접을 진행하고, 인터뷰어와 인터뷰이 역할을 번갈아 맡음. Exponent와 연계해 유료화</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">코딩 인터뷰 특화</td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">코딩 인터뷰 특화, P2P 구조</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">유료 (Exponent 연계)</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">기술 면접 특화 — 우리 범위(일반 취업 면접)와 다름. 참고 낮음</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Hello Interview<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://hellointerview.com" target="_blank" style="color:#888;">hellointerview.com</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">시스템 디자인 인터뷰 특화, 단계별 다이어그램 연습</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기술 면접 시스템 디자인 특화</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">$49/월</td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">기술 면접 특화 — 우리 범위 밖. 참고 낮음</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Wonsulting<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.wonsulting.com" target="_blank" style="color:#888;">wonsulting.com</a></span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">허브형</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">구직 도구, 커리어 코칭, 이력서·LinkedIn 수정, 지원 대행, 면접 준비</td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">면접 전용이라기보다 잡서치·커리어 허브에 가까움</td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">코칭/패키지형 (공개 가격 다양)</td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">허브형</span></td>
+                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">범위 밖. 조사 대상에서 제외</td>
                       </tr>
                       <tr>
                         <td style="padding:10px 12px;font-weight:600;">Prepzi<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://prepzi.ai" target="_blank" style="color:#888;">prepzi.ai</a></span></td>
+                        <td style="padding:10px 12px;"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;">AI 음성 면접관, 답변에 따라 적응형 재질문 생성</td>
                         <td style="padding:10px 12px;">음성 기반 적응형 면접</td>
                         <td style="padding:10px 12px;">무료체험 $0 / Interview Pack $10 일회 / Basic $15/월 / Premium $25/월</td>
                         <td style="padding:10px 12px;"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
+                        <td style="padding:10px 12px;font-size:12px;color:#555;">적응형 재질문 구조 — 질문 흐름 설계 시 참고</td>
                       </tr>
                     </tbody>
                   </table>
@@ -1711,13 +1705,11 @@
         "stage-compare": "단계별 비교",
         "output-compare": "결과물 비교",
         strategy: "기획 적용점",
-        briefing: "브리핑 보고",
         interview: "AI 면접 플랫폼"
       };
       document.getElementById("viewTitle").textContent = titleMap[view] || "비교 보드";
       const fab = document.getElementById("fabAddStep");
       if (fab) fab.style.display = view === "service-flow" ? "block" : "none";
-      if (view === "briefing") loadBriefing();
       render();
     }
 
