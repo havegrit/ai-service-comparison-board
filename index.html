@@ -1128,12 +1128,6 @@
               </div>
             </div>
 
-            <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
-              <button id="filterAll" onclick="setInterviewFilter('all')" style="padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid #2563eb;background:#2563eb;color:#fff;cursor:pointer;">전체 보기</button>
-              <button id="filterKey" onclick="setInterviewFilter('key')" style="padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid #d1d5db;background:#fff;color:#374151;cursor:pointer;">⭐ 핵심 서비스만</button>
-              <button id="filterB2B" onclick="setInterviewFilter('b2b')" style="padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid #d1d5db;background:#fff;color:#374151;cursor:pointer;">B2B/B2G 진입 서비스만</button>
-            </div>
-
             <!-- 핵심 요약 비교표 -->
             <div style="background:#fff;border:1.5px solid #2563eb22;border-radius:10px;padding:18px 20px;margin-bottom:4px;">
               <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:12px;">⚡ 핵심 서비스 요약 비교 (전략적 포지션 기준)</div>
@@ -2644,30 +2638,6 @@
     }
     initApp();
 
-    function setInterviewFilter(mode) {
-      const allRows = document.querySelectorAll('#interviewGrid tbody tr');
-      allRows.forEach(tr => {
-        const tags = tr.dataset.tags || '';
-        tr.style.display = (mode === 'all' || tags.includes(mode)) ? '' : 'none';
-      });
-      // Hide section divs where no rows are visible
-      document.querySelectorAll('#interviewGrid > div').forEach(section => {
-        if (mode === 'all') { section.style.display = ''; return; }
-        const rows = Array.from(section.querySelectorAll('tbody tr'));
-        const hasVisible = rows.some(tr => tr.style.display !== 'none');
-        section.style.display = hasVisible ? '' : 'none';
-      });
-      ['filterAll', 'filterKey', 'filterB2B'].forEach(id => {
-        const btn = document.getElementById(id);
-        if (!btn) return;
-        btn.style.background = '#fff';
-        btn.style.color = '#374151';
-        btn.style.borderColor = '#d1d5db';
-      });
-      const activeId = mode === 'all' ? 'filterAll' : mode === 'key' ? 'filterKey' : 'filterB2B';
-      const active = document.getElementById(activeId);
-      if (active) { active.style.background = '#2563eb'; active.style.color = '#fff'; active.style.borderColor = '#2563eb'; }
-    }
   </script>
 </body>
 </html>
