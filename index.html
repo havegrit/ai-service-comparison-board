@@ -1724,6 +1724,7 @@
 
     function setView(view) {
       activeView = view;
+      localStorage.setItem("activeView", view);
       document.querySelectorAll(".view").forEach(el => el.classList.toggle("active", el.id === view));
       document.querySelectorAll(".nav button").forEach(el => el.classList.toggle("active", el.dataset.view === view));
       const titleMap = {
@@ -2435,6 +2436,9 @@
       const button = event.target.closest("button[data-view]");
       if (button) setView(button.dataset.view);
     });
+
+    const savedView = localStorage.getItem("activeView");
+    if (savedView) setView(savedView);
 
     // 서비스 목록 드래그 정렬 (순서는 저장되어 모든 화면에 반영됨)
     let _dragServiceId = null;
