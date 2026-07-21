@@ -1128,7 +1128,13 @@
               </div>
             </div>
 
-            <div style="display:grid;gap:24px;">
+            <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+              <button id="filterAll" onclick="setInterviewFilter('all')" style="padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid #2563eb;background:#2563eb;color:#fff;cursor:pointer;">전체 보기</button>
+              <button id="filterKey" onclick="setInterviewFilter('key')" style="padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid #d1d5db;background:#fff;color:#374151;cursor:pointer;">⭐ 핵심 서비스만</button>
+              <button id="filterB2B" onclick="setInterviewFilter('b2b')" style="padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;border:1.5px solid #d1d5db;background:#fff;color:#374151;cursor:pointer;">B2B/B2G 진입 서비스만</button>
+            </div>
+
+            <div style="display:grid;gap:24px;" id="interviewGrid">
 
               <div>
                 <h3 style="margin-bottom:12px;">국내 서비스</h3>
@@ -1155,7 +1161,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr data-tags="key b2b">
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">에듀스<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://educe.co.kr" target="_blank" style="color:#888;">educe.co.kr</a> / <a href="https://inface.ai" target="_blank" style="color:#888;">inface.ai</a></span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">hybrid</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">AI 면접 7종 (대화형/자소서기반/기업맞춤형 등), 자소서·인적성·합격예측 통합</td>
@@ -1209,7 +1215,7 @@
                         <td style="padding:10px 12px;"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
                         <td style="padding:10px 12px;font-size:12px;color:#555;">신입 특화 UX — 대학/취업지원기관 대상 기관 솔루션에 응용 가능</td>
                       </tr>
-                      <tr>
+                      <tr data-tags="key b2b">
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">EnhanceU ⭐<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://enhanceu.com" target="_blank" style="color:#888;">enhanceu.com</a></span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f3e8ff;color:#6b21a8;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">B2B특화</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">실사 면접관 영상 + 3D 가상면접관 모의면접 + AI 음성인식(STT) + 말속도·음성 높낮이 분석 + 얼굴인식(미소·감정·자세 27개 특징 정량화·시선추적) + 역량분석 게임 + 전문가 피드백 채팅 + NCS 직업기초능력 + 외국어 면접(영/중/일)</td>
@@ -1218,7 +1224,7 @@
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:600;">✅ B2B/B2G 안착</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;"><strong>⚠️ 핵심 경쟁자.</strong> 국내 B2B/B2G 선점자 (규모·기능 educe 앞섬). 피드백 퀄리티는 직접 체험 미완료(미확인). 단, 대화형 기능 없음 — 대화형 + 기관 특화가 차별화 포인트</td>
                       </tr>
-                      <tr>
+                      <tr data-tags="key b2b">
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">노트미 (NoteMe) ⭐<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.noteme.me" target="_blank" style="color:#888;">noteme.me</a></span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">대화형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">"면접은 대화다" 컨셉. 맞춤형 질문 + 심층 꼬리질문 + 실시간 피드백 + 개인코치. 텍스트 입력 방식도 지원(음성 외 옵션). 자기소개서 생성·경험정리는 대학/기관 전용</td>
@@ -1284,7 +1290,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr style="background:#f0fdf4;">
+                      <tr style="background:#f0fdf4;" data-tags="key b2b">
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">StandOut ⭐<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://standout.com" target="_blank" style="color:#888;">standout.com</a></span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">200+ 업종 / 900+ 면접, 고용주·대학 제공 실제 질문 활용, AI 언어 피드백</td>
@@ -1383,7 +1389,7 @@
                         <td style="padding:10px 12px;"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
                         <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">적응형 재질문 구조 — 질문 흐름 설계 시 참고</td>
                       </tr>
-                      <tr>
+                      <tr data-tags="key">
                         <td style="padding:10px 12px;font-weight:600;">joblander ⭐<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://joblander.com" target="_blank" style="color:#888;">joblander.com</a></span></td>
                         <td style="padding:10px 12px;"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">대화형</span></td>
                         <td style="padding:10px 12px;">컨설턴트 모드→모의 면접 모드 전환, 꼬리 질문+날카로운 추가 질문, 즉시 피드백</td>
@@ -2567,6 +2573,30 @@
       render();
     }
     initApp();
+
+    function setInterviewFilter(mode) {
+      const rows = document.querySelectorAll('#interviewGrid tr[data-tags]');
+      rows.forEach(tr => {
+        const tags = tr.dataset.tags || '';
+        if (mode === 'all') {
+          tr.style.display = '';
+        } else if (mode === 'key') {
+          tr.style.display = tags.includes('key') ? '' : 'none';
+        } else if (mode === 'b2b') {
+          tr.style.display = tags.includes('b2b') ? '' : 'none';
+        }
+      });
+      ['filterAll', 'filterKey', 'filterB2B'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        btn.style.background = '#fff';
+        btn.style.color = '#374151';
+        btn.style.borderColor = '#d1d5db';
+      });
+      const activeId = mode === 'all' ? 'filterAll' : mode === 'key' ? 'filterKey' : 'filterB2B';
+      const active = document.getElementById(activeId);
+      if (active) { active.style.background = '#2563eb'; active.style.color = '#fff'; active.style.borderColor = '#2563eb'; }
+    }
   </script>
 </body>
 </html>
