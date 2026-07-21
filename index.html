@@ -2645,16 +2645,17 @@
     initApp();
 
     function setInterviewFilter(mode) {
-      const rows = document.querySelectorAll('#interviewGrid tr[data-tags]');
-      rows.forEach(tr => {
+      const allRows = document.querySelectorAll('#interviewGrid tbody tr');
+      allRows.forEach(tr => {
         const tags = tr.dataset.tags || '';
-        if (mode === 'all') {
-          tr.style.display = '';
-        } else if (mode === 'key') {
-          tr.style.display = tags.includes('key') ? '' : 'none';
-        } else if (mode === 'b2b') {
-          tr.style.display = tags.includes('b2b') ? '' : 'none';
-        }
+        tr.style.display = (mode === 'all' || tags.includes(mode)) ? '' : 'none';
+      });
+      // Hide section divs where no rows are visible
+      document.querySelectorAll('#interviewGrid > div').forEach(section => {
+        if (mode === 'all') { section.style.display = ''; return; }
+        const rows = Array.from(section.querySelectorAll('tbody tr'));
+        const hasVisible = rows.some(tr => tr.style.display !== 'none');
+        section.style.display = hasVisible ? '' : 'none';
       });
       ['filterAll', 'filterKey', 'filterB2B'].forEach(id => {
         const btn = document.getElementById(id);
