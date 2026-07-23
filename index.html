@@ -144,16 +144,6 @@
       border-color: rgba(255,255,255,.12);
     }
 
-    .sidebar-tools .publish {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
-    }
-
-    .sidebar-tools .secondary {
-      background: #334155;
-    }
-
     .main {
       min-width: 0;
       display: flex;
@@ -183,18 +173,6 @@
       color: var(--muted);
       font-size: 12px;
       margin-top: 2px;
-    }
-
-    .sync-status {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 4px;
-      line-height: 1.35;
-    }
-
-    .sync-status strong {
-      color: var(--text);
-      font-weight: 700;
     }
 
     .top-actions {
@@ -707,135 +685,6 @@
       min-width: 0;
     }
 
-    /* 단계별 비교: 서비스는 가로 컬럼, 각 서비스 단계는 세로 */
-    #stage-compare { --svc-col-width: 800px; }
-
-    #stage-compare .compare-section {
-      display: flex;
-      flex-direction: row;
-      align-items: start;
-      gap: 18px;
-      overflow-x: auto;
-      overflow-y: visible;
-      padding-bottom: 10px;
-    }
-
-    .svc-flow-block {
-      flex: 0 0 var(--svc-col-width);
-      width: var(--svc-col-width);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      max-height: calc(100vh - 210px);
-      min-height: 360px;
-    }
-
-    .svc-flow-header {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--line);
-      background: #fbfcfe;
-      position: sticky;
-      top: 0;
-      z-index: 2;
-    }
-
-    .svc-flow-header strong { font-size: 17px; }
-
-    .svc-step-list {
-      display: grid;
-      gap: 18px;
-      padding: 18px;
-      overflow-y: auto;
-      min-height: 0;
-    }
-
-    .svc-step-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      padding: 14px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .svc-step-head {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .svc-step-title { font-weight: 730; font-size: 15px; }
-
-    .stage-chip {
-      font-size: 12px;
-      color: var(--muted);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 2px 9px;
-    }
-
-    .svc-capture-stack {
-      display: grid;
-      gap: 10px;
-    }
-
-    .svc-capture {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #0b1220;
-      overflow: hidden;
-      cursor: zoom-in;
-      position: relative;
-      display: block;
-    }
-
-    .svc-capture img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .svc-capture.no-image {
-      background: #f8fafc;
-      color: var(--muted);
-      cursor: default;
-      padding: 30px;
-      text-align: center;
-      font-size: 13px;
-    }
-
-    /* 서비스 목록 드래그 정렬 */
-    .service-list button {
-      position: relative;
-      cursor: grab;
-      padding-right: 26px;
-    }
-    .service-list button.dragging { opacity: 0.45; cursor: grabbing; }
-    .service-list button.drop-target {
-      border-color: var(--primary);
-      box-shadow: inset 0 0 0 2px var(--primary);
-    }
-    .service-list .drag-handle {
-      position: absolute;
-      right: 9px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1;
-      user-select: none;
-    }
-
     .note {
       font-size: 12px;
       color: var(--muted);
@@ -937,7 +786,6 @@
       .service-list { max-width: none; }
       .step-card { grid-template-columns: 1fr; }
       .editor-grid { grid-template-columns: 1fr; }
-      #stage-compare { --svc-col-width: min(88vw, 460px); }
     }
 
     @media print {
@@ -948,43 +796,6 @@
       .panel, .stage-board { box-shadow: none; break-inside: avoid; }
       body { background: white; }
     }
-
-    .briefing-block {
-      display: grid;
-      gap: 8px;
-    }
-
-    .briefing-block-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .briefing-label {
-      font-weight: 700;
-      font-size: 13px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: var(--surface-soft);
-      border: 1px solid var(--line);
-      white-space: nowrap;
-    }
-
-    .briefing-label.blue { color: #1d4ed8; background: var(--primary-soft); border-color: #c9dafd; }
-    .briefing-label.green { color: var(--green); background: #e9f8f3; border-color: #cceadf; }
-    .briefing-label.amber { color: var(--amber); background: #fff5e3; border-color: #f3dfb8; }
-
-    .briefing-hint {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    #briefing textarea {
-      min-height: unset;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
   </style>
 </head>
 <body>
@@ -995,17 +806,14 @@
         <div class="brand-sub">이력서·자소서·포트폴리오 UX 흐름 조사</div>
       </div>
       <nav class="nav" id="nav">
-        <button class="active" data-view="dashboard">전체 요약</button>
-        <button data-view="service-flow">서비스별 흐름</button>
-        <button data-view="stage-compare">단계별 비교</button>
-        <button data-view="output-compare">결과물 비교</button>
-        <button data-view="strategy">기획 적용점</button>
-        <button data-view="interview">AI 면접 플랫폼</button>
+        <button class="active" data-view="dashboard">01 전체 요약</button>
+        <button data-view="service-flow">02 서비스별 흐름</button>
+        <button data-view="stage-compare">03 단계별 비교</button>
+        <button data-view="output-compare">04 결과물 비교</button>
+        <button data-view="strategy">05 기획 적용점</button>
+        <button data-view="jeju-universities">06 제주 대학 지원단</button>
       </nav>
       <div class="sidebar-tools">
-        <button id="publishSnapshot" class="publish">게시</button>
-        <button id="refreshPublished" class="secondary">원격 새로고침</button>
-        <button id="githubTokenBtn" class="secondary">GitHub 토큰 설정</button>
         <button id="exportJson">백업 내보내기</button>
         <button id="importJson">백업 불러오기</button>
         <input class="file-input" id="importJsonInput" type="file" accept="application/json">
@@ -1016,9 +824,8 @@
     <main class="main">
       <header class="topbar">
         <div>
-          <div class="top-title" id="viewTitle">전체 요약</div>
-          <div class="top-sub">URL 방문자는 게시된 스냅샷을 읽고, 편집 내용은 이 브라우저에 임시 저장됩니다.</div>
-          <div class="sync-status" id="syncStatus">데이터 상태 확인 중</div>
+          <div class="top-title" id="viewTitle">01 전체 요약</div>
+          <div class="top-sub">캡처 이미지는 이 브라우저에 저장됩니다. 중요한 작업 후에는 백업을 내보내세요.</div>
         </div>
         <div class="top-actions">
           <button id="addServiceBtn" class="primary">서비스 추가</button>
@@ -1038,11 +845,11 @@
               <div class="stat-value" id="statSteps">0</div>
             </div>
             <div class="stat">
-              <div class="stat-label">완료 단계</div>
+              <div class="stat-label">등록된 캡처</div>
               <div class="stat-value" id="statImages">0</div>
             </div>
             <div class="stat">
-              <div class="stat-label">평균 완료율</div>
+              <div class="stat-label">평균 캡처율</div>
               <div class="stat-value" id="statProgress">0%</div>
             </div>
           </div>
@@ -1051,7 +858,7 @@
             <div class="panel-title">
               <div>
                 <h2>서비스 요약</h2>
-                <p>조사 대상 서비스의 유형, 결과물, 단계 완료율을 빠르게 확인합니다.</p>
+                <p>조사 대상 서비스의 유형, 결과물, 캡처 진행률을 빠르게 확인합니다.</p>
               </div>
               <div class="toolbar">
                 <input id="serviceSearch" placeholder="서비스 검색">
@@ -1068,7 +875,7 @@
           <div class="panel">
             <div class="panel-title">
               <div>
-                <h2>서비스별 실제 흐름</h2>
+                <h2>02 서비스별 실제 흐름</h2>
                 <p>서비스마다 다른 사용 흐름을 그대로 기록하고, 각 단계에 캡처와 메모를 붙입니다.</p>
               </div>
             </div>
@@ -1083,8 +890,11 @@
           <div class="panel">
             <div class="panel-title">
               <div>
-                <h2>서비스별 단계 비교</h2>
-                <p>서비스를 가로로 나란히 놓고, 각 서비스의 단계는 세로로 나열합니다. 캡처 원본을 잘림 없이 크게 확인할 수 있고, 순서는 '서비스별 흐름'에서 드래그로 바꿀 수 있습니다.</p>
+                <h2>03 공통 단계별 가로 비교</h2>
+                <p>서비스별 실제 단계 중 공통 분류가 같은 캡처를 모아 가로로 비교합니다.</p>
+              </div>
+              <div class="toolbar">
+                <select id="commonStageFilter"></select>
               </div>
             </div>
             <div class="compare-section" id="stageCompare"></div>
@@ -1095,7 +905,7 @@
           <div class="panel">
             <div class="panel-title">
               <div>
-                <h2>결과물 비교</h2>
+                <h2>04 결과물 비교</h2>
                 <p>AI가 최종적으로 제공하는 산출물의 형태와 유료 전환 지점을 비교합니다.</p>
               </div>
             </div>
@@ -1109,7 +919,7 @@
           <div class="panel">
             <div class="panel-title">
               <div>
-                <h2>B2B/B2G 기획 적용점</h2>
+                <h2>05 B2B/B2G 기획 적용점</h2>
                 <p>조사 내용을 초기 제품 기획, 기관 관리자 기능, 결과 리포트 설계로 연결합니다.</p>
               </div>
             </div>
@@ -1119,386 +929,165 @@
           </div>
         </section>
 
-        <section id="interview" class="view">
-          <div class="panel">
-            <div class="panel-title">
-              <div>
-                <h2>AI 면접 플랫폼</h2>
-                <p>AI 면접 연습 서비스의 경쟁 현황과 B2B/B2G 기회 분석 - 연습형만 포함 (2026-07-15 기준)</p>
+        <section id="jeju-universities" class="view">
+          <div class="panel" style="padding:0; background:transparent; border:none; box-shadow:none;">
+            <style>
+              .ju-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto 32px; }
+              @media(max-width:900px){ .ju-grid { grid-template-columns:1fr; } }
+              .ju-card { background:#fff; border:1px solid #cbd5e1; border-radius:12px; overflow:hidden; }
+              .ju-card-hd { padding:16px 18px 14px; border-bottom:1px solid #cbd5e1; }
+              .ju-card-hd .ju-pri { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.5px; padding:2px 8px; border-radius:99px; margin-bottom:8px; color:#fff; }
+              .ju-card-hd h2 { font-size:16px; font-weight:700; }
+              .ju-card-hd .ju-type { font-size:12px; color:#5b6475; margin-top:3px; }
+              .u1-hd { background:#eff6ff; border-bottom-color:#bfdbfe; } .u1-hd .ju-pri { background:#3b82f6; }
+              .u2-hd { background:#f0fdf4; border-bottom-color:#a7f3d0; } .u2-hd .ju-pri { background:#10b981; }
+              .u3-hd { background:#fffbeb; border-bottom-color:#fde68a; } .u3-hd .ju-pri { background:#f59e0b; }
+              .ju-card-bd { padding:16px 18px; }
+              .ju-org-sec { margin-bottom:14px; }
+              .ju-org-sec:last-child { margin-bottom:0; }
+              .ju-org-root { display:flex; align-items:center; gap:7px; font-size:13px; font-weight:700; padding:6px 10px; border-radius:0 6px 6px 0; background:#f8fafc; margin-bottom:6px; }
+              .u1-root { border-left:3px solid #3b82f6; } .u2-root { border-left:3px solid #10b981; } .u3-root { border-left:3px solid #f59e0b; }
+              .ju-org-children { padding-left:18px; display:flex; flex-direction:column; gap:3px; }
+              .ju-org-child { position:relative; font-size:12.5px; padding:4px 8px 4px 12px; border-radius:5px; background:#f1f5f9; }
+              .ju-org-child::before { content:""; position:absolute; left:0; top:50%; width:8px; height:1px; background:#cbd5e1; }
+              .ju-sub { font-size:11px; color:#5b6475; margin-top:1px; }
+              .ju-badge { display:inline-block; font-size:10px; font-weight:600; padding:1px 6px; border-radius:4px; margin-left:4px; vertical-align:middle; }
+              .b-ai { background:#e0e7ff; color:#4338ca; } .b-ok { background:#dcfce7; color:#166534; } .b-gap { background:#fee2e2; color:#991b1b; }
+              .ju-divider { height:1px; background:#cbd5e1; margin:12px 0; }
+              .ju-touch { font-size:12px; color:#5b6475; }
+              .ju-touch strong { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; display:block; margin-bottom:5px; color:#5b6475; }
+              .ju-touch ul { list-style:none; display:flex; flex-direction:column; gap:3px; padding:0; }
+              .ju-touch li::before { content:"→ "; color:#cbd5e1; }
+              .ju-insights { max-width:1100px; margin:0 auto; }
+              .ju-insights h3 { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:#5b6475; margin-bottom:12px; }
+              .ju-ins-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+              @media(max-width:700px){ .ju-ins-grid { grid-template-columns:1fr; } }
+              .ju-ins-card { background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:14px 16px; }
+              .ju-ins-card .num { font-size:18px; font-weight:800; line-height:1; margin-bottom:6px; }
+              .ju-ins-card .desc { font-size:13px; color:#5b6475; }
+              .ic1 .num { color:#3b82f6; } .ic2 .num { color:#10b981; } .ic3 .num { color:#f59e0b; }
+            </style>
+
+            <div style="padding:24px 0 8px; text-align:center; margin-bottom:20px;">
+              <div style="font-size:18px; font-weight:700; color:#172033;">제주 소재 대학 취업·창업 지원단 구조</div>
+              <div style="font-size:13px; color:#5b6475; margin-top:4px;">플랫폼 영업 공략 우선순위 기반 정리 · 2026-07-23</div>
+            </div>
+
+            <div class="ju-grid">
+              <!-- 제주대학교 -->
+              <div class="ju-card">
+                <div class="ju-card-hd u1-hd">
+                  <div class="ju-pri">1순위 공략</div>
+                  <h2>제주대학교</h2>
+                  <div class="ju-type">거점 국립대 &nbsp;·&nbsp; 제주 최대 규모</div>
+                </div>
+                <div class="ju-card-bd">
+                  <div class="ju-org-sec">
+                    <div class="ju-org-root u1-root">🏛 산학협력단</div>
+                    <div class="ju-org-children">
+                      <div class="ju-org-child">창업지원단 <span class="ju-sub" style="display:inline; margin-left:4px;">창업교육 / 창업보육 / 창업지원 3개 센터</span></div>
+                      <div class="ju-org-children" style="padding-left:16px; margin-top:3px;">
+                        <div class="ju-org-child">창업교육센터</div>
+                        <div class="ju-org-child">창업보육센터</div>
+                        <div class="ju-org-child">창업지원센터</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ju-org-sec">
+                    <div class="ju-org-root u1-root">💼 진로취업과 + 대학일자리플러스센터</div>
+                    <div class="ju-org-children">
+                      <div class="ju-org-child">진로취업과 <div class="ju-sub">취업상담·채용연계·취업통계</div></div>
+                      <div class="ju-org-child">대학일자리플러스센터 <div class="ju-sub">고용노동부 사업 집행</div></div>
+                      <div class="ju-org-child">AI 진로·취업 챗봇 <span class="ju-badge b-ai">운영 중</span><div class="ju-sub">clip.jejunu.ac.kr 메인 노출</div></div>
+                    </div>
+                  </div>
+                  <div class="ju-divider"></div>
+                  <div class="ju-touch"><strong>주요 접점</strong><ul><li>학생 서포터즈 → 입주기업 마케팅</li><li>교수 연구진 ↔ 창업기업 매칭</li><li>진로취업과 → 성과지표 허브</li></ul></div>
+                  <div class="ju-divider"></div>
+                  <div style="font-size:12px;">AI 챗봇 <span class="ju-badge b-ok">도입 중</span> &nbsp; 고도화 포인트 <span class="ju-badge b-ai">있음</span></div>
+                </div>
+              </div>
+
+              <!-- 제주한라대학교 -->
+              <div class="ju-card">
+                <div class="ju-card-hd u2-hd">
+                  <div class="ju-pri">2순위 공략</div>
+                  <h2>제주한라대학교</h2>
+                  <div class="ju-type">사립 전문대 &nbsp;·&nbsp; 중형</div>
+                </div>
+                <div class="ju-card-bd">
+                  <div class="ju-org-sec">
+                    <div class="ju-org-root u2-root">🏛 산학협력단 <span style="font-size:11px; font-weight:400; color:#5b6475;">(독립법인)</span></div>
+                    <div class="ju-org-children">
+                      <div class="ju-org-child">인력개발원</div>
+                      <div class="ju-org-child">창업보육센터</div>
+                      <div class="ju-org-child">교수학습지원센터</div>
+                      <div class="ju-org-child">한라뉴캐슬PBL교육연구원</div>
+                      <div class="ju-org-child">전공 특화 센터 다수</div>
+                    </div>
+                  </div>
+                  <div class="ju-org-sec" style="margin-top:12px;">
+                    <div class="ju-org-root u2-root">💼 취창업지원센터 <span style="font-size:11px; font-weight:400; color:#5b6475;">(인력개발원 산하)</span></div>
+                    <div class="ju-org-children">
+                      <div class="ju-org-child">취업지원팀 <div class="ju-sub">국내취업 알선·취업프로그램·통계</div></div>
+                      <div class="ju-org-child">창업교육팀 <div class="ju-sub">창업교육 강좌·동아리</div></div>
+                      <div class="ju-org-child">JOB CAFE <div class="ju-sub">취업·진로상담·면접 클리닉</div></div>
+                    </div>
+                  </div>
+                  <div class="ju-org-sec" style="margin-top:8px;">
+                    <div class="ju-org-root u2-root">🏢 대학내 지원부서</div>
+                    <div class="ju-org-children">
+                      <div class="ju-org-child">학생상담센터 · 현장실습지원센터</div>
+                      <div class="ju-org-child">교수학습지원센터 · 글로벌산학협력센터</div>
+                      <div class="ju-org-child">BI센터 <div class="ju-sub">입주기업-학교 네트워크</div></div>
+                    </div>
+                  </div>
+                  <div class="ju-divider"></div>
+                  <div class="ju-touch"><strong>주요 접점</strong><ul><li>JOB CAFE → 상담·면접 클리닉</li><li>현장실습지원센터 → 인턴십</li><li>취업률이 핵심 KPI (전문대)</li></ul></div>
+                  <div class="ju-divider"></div>
+                  <div style="font-size:12px;">AI 서비스 <span class="ju-badge b-gap">공백</span> &nbsp; 이력관리 고도화 <span class="ju-badge b-ok">수요 있음</span></div>
+                </div>
+              </div>
+
+              <!-- 제주국제대학교 -->
+              <div class="ju-card">
+                <div class="ju-card-hd u3-hd">
+                  <div class="ju-pri">3순위 (대체 영업)</div>
+                  <h2>제주국제대학교</h2>
+                  <div class="ju-type">사립대 &nbsp;·&nbsp; 소형 (학부 323명)</div>
+                </div>
+                <div class="ju-card-bd">
+                  <div class="ju-org-sec">
+                    <div class="ju-org-root u3-root">🎓 학생지원처 → 취·창업지원단</div>
+                    <div class="ju-org-children">
+                      <div class="ju-org-child">직업능력개발센터 <div class="ju-sub">셀프모의면접실 포함</div></div>
+                      <div class="ju-org-child">온라인 모의면접 <span class="ju-badge b-ai">셀프뷰</span><div class="ju-sub">EnhanceU 제품</div></div>
+                    </div>
+                  </div>
+                  <div class="ju-org-sec" style="margin-top:12px;">
+                    <div class="ju-org-root u3-root">🏛 산학협력단</div>
+                    <div class="ju-org-children">
+                      <div class="ju-org-child">취·창업지원단과 완전 별도 <div class="ju-sub">LINC사업단·연구소 포함</div></div>
+                    </div>
+                  </div>
+                  <div class="ju-divider"></div>
+                  <div class="ju-touch"><strong>주요 접점</strong><ul><li>셀프뷰 이용안내 공식 게재</li><li>온라인 + 오프라인 모의면접</li><li>소규모 → 의사결정 빠름</li></ul></div>
+                  <div class="ju-divider"></div>
+                  <div style="font-size:12px;">셀프뷰 <span class="ju-badge b-ok">도입 중</span> &nbsp; AI 기능 포함 <span class="ju-badge" style="background:#f1f5f9; color:#5b6475;">미확인</span></div>
+                </div>
               </div>
             </div>
 
-            <!-- 핵심 요약 비교표 -->
-            <div style="margin-bottom:24px;">
-              <div style="font-size:13px;font-weight:700;color:#2563eb;margin-bottom:12px;">⚡ 핵심 서비스 요약 비교 (전략적 포지션 기준)</div>
-              <div style="overflow-x:auto;">
-                <table style="width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;">
-                  <colgroup>
-                    <col style="width:12%">
-                    <col style="width:10%">
-                    <col style="width:8%">
-                    <col style="width:9%">
-                    <col style="width:11%">
-                    <col style="width:12%">
-                    <col style="width:38%">
-                  </colgroup>
-                  <thead>
-                    <tr style="background:#f1f5f9;text-align:left;">
-                      <th style="padding:10px 12px;border-bottom:2px solid #e2e8f0;">서비스</th>
-                      <th style="padding:10px 12px;border-bottom:2px solid #e2e8f0;">유형</th>
-                      <th style="padding:10px 12px;border-bottom:2px solid #e2e8f0;text-align:center;">대화형</th>
-                      <th style="padding:10px 12px;border-bottom:2px solid #e2e8f0;">국내/해외</th>
-                      <th style="padding:10px 12px;border-bottom:2px solid #e2e8f0;">B2B/B2G</th>
-                      <th style="padding:10px 12px;border-bottom:2px solid #e2e8f0;">가격</th>
-                      <th style="padding:10px 12px;border-bottom:2px solid #e2e8f0;">핵심 한줄 평</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style="border-bottom:1px solid #f1f5f9;">
-                      <td style="padding:10px 12px;font-weight:600;">에듀스<br><span style="font-weight:400;color:#888;font-size:11px;">inface.ai</span></td>
-                      <td style="padding:10px 12px;"><span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:4px;font-size:11px;">hybrid</span></td>
-                      <td style="padding:10px 12px;text-align:center;">❌</td>
-                      <td style="padding:10px 12px;">🇰🇷 국내</td>
-                      <td style="padding:10px 12px;"><span style="color:#b45309;">⚠️ 일부</span></td>
-                      <td style="padding:10px 12px;">부분무료+유료</td>
-                      <td style="padding:10px 12px;color:#555;">직접 체험 — 피드백 퀄리티 ChatGPT 수준. B2B·B2G 진입 확인이나 대화형 없음</td>
-                    </tr>
-                    <tr style="border-bottom:1px solid #f1f5f9;background:#fafafa;">
-                      <td style="padding:10px 12px;font-weight:600;">EnhanceU ⭐</td>
-                      <td style="padding:10px 12px;"><span style="background:#f3e8ff;color:#6b21a8;padding:2px 6px;border-radius:4px;font-size:11px;">B2B특화</span></td>
-                      <td style="padding:10px 12px;text-align:center;">❌</td>
-                      <td style="padding:10px 12px;">🇰🇷 국내</td>
-                      <td style="padding:10px 12px;"><span style="color:#15803d;font-weight:600;">✅ 300여 기관</span></td>
-                      <td style="padding:10px 12px;">기관 라이선스</td>
-                      <td style="padding:10px 12px;color:#555;">B2B/B2G 선점자 (자사 주장). 얼굴인식·역량게임 등 기능 풍부. 퀄리티 미체험</td>
-                    </tr>
-                    <tr style="border-bottom:1px solid #f1f5f9;">
-                      <td style="padding:10px 12px;font-weight:600;">노트미 ⭐<br><span style="font-weight:400;color:#888;font-size:11px;">NoteMe</span></td>
-                      <td style="padding:10px 12px;"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 6px;border-radius:4px;font-size:11px;">대화형</span></td>
-                      <td style="padding:10px 12px;text-align:center;">✅</td>
-                      <td style="padding:10px 12px;">🇰🇷 국내</td>
-                      <td style="padding:10px 12px;"><span style="color:#b45309;">⚠️ 소규모</span></td>
-                      <td style="padding:10px 12px;">₩20,000/회</td>
-                      <td style="padding:10px 12px;color:#555;">국내 대화형 선점. B2B(한남대·취업N) 진입 중이나 인지도·규모 제한</td>
-                    </tr>
-                    <tr style="border-bottom:1px solid #f1f5f9;background:#fafafa;">
-                      <td style="padding:10px 12px;font-weight:600;">joblander ⭐</td>
-                      <td style="padding:10px 12px;"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 6px;border-radius:4px;font-size:11px;">대화형</span></td>
-                      <td style="padding:10px 12px;text-align:center;">✅</td>
-                      <td style="padding:10px 12px;">🌐 해외</td>
-                      <td style="padding:10px 12px;"><span style="color:#94a3b8;">❌ 없음</span></td>
-                      <td style="padding:10px 12px;">베타 무료</td>
-                      <td style="padding:10px 12px;color:#555;">직접 체험 — 대화형 퀄리티 최상. 한국어 음성 지원. B2B 미구축이 공백</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:10px 12px;font-weight:600;">StandOut ⭐</td>
-                      <td style="padding:10px 12px;"><span style="background:#f3e8ff;color:#6b21a8;padding:2px 6px;border-radius:4px;font-size:11px;">B2B특화</span></td>
-                      <td style="padding:10px 12px;text-align:center;">—</td>
-                      <td style="padding:10px 12px;">🌐 해외(미국)</td>
-                      <td style="padding:10px 12px;"><span style="color:#15803d;font-weight:600;">✅ 대학 B2B</span></td>
-                      <td style="padding:10px 12px;">기관 라이선스</td>
-                      <td style="padding:10px 12px;color:#555;">미국 대학 커리어센터 B2B 검증 완료 — 국내 동일 포지션의 해외 레퍼런스</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="ju-insights">
+              <h3>핵심 시사점</h3>
+              <div class="ju-ins-grid">
+                <div class="ju-ins-card ic1"><div class="num">성과지표</div><div class="desc">세 대학 모두 취업률·참여율·만족도 데이터 허브. 설득 포인트는 <strong>리포팅·통계 자동화</strong>.</div></div>
+                <div class="ju-ins-card ic2"><div class="num">공략 구도</div><div class="desc">제주대 AI 챗봇 도입 → <strong>고도화·대체</strong>. 한라대 이력관리 운영 중 → 고도화 수요.</div></div>
+                <div class="ju-ins-card ic3"><div class="num">경쟁 구도</div><div class="desc">제주국제대 EnhanceU 셀프뷰 사용 중 → 대체 영업 가능. 소규모라 파급력은 낮음.</div></div>
               </div>
-              <div style="margin-top:10px;padding:10px 12px;background:#eff6ff;border-radius:6px;font-size:12px;color:#1e40af;line-height:1.6;">
-                <strong>전략적 공백:</strong> 대화형(✅) + B2B/B2G(✅)를 동시에 가진 서비스가 없음 — joblander(대화형 O, B2B X) vs EnhanceU(B2B O, 대화형 X)
-              </div>
-            </div>
-
-            <div style="display:grid;gap:24px;" id="interviewGrid">
-
-              <div>
-                <h3 style="margin-bottom:12px;">국내 서비스</h3>
-                <div style="overflow-x:auto;">
-                  <table style="width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;">
-                    <colgroup>
-                      <col style="width:14%">
-                      <col style="width:8%">
-                      <col style="width:22%">
-                      <col style="width:18%">
-                      <col style="width:12%">
-                      <col style="width:10%">
-                      <col style="width:16%">
-                    </colgroup>
-                    <thead>
-                      <tr style="background:var(--bg-secondary,#f4f4f5);text-align:left;">
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">서비스</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">유형</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">핵심 기능</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">강점</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">가격</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">B2B/B2G</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">우리 서비스 적용 포인트</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr data-tags="key b2b">
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">에듀스<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://educe.co.kr" target="_blank" style="color:#888;">educe.co.kr</a> / <a href="https://inface.ai" target="_blank" style="color:#888;">inface.ai</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">hybrid</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">AI 면접 7종 (대화형/자소서기반/기업맞춤형 등), 자소서·인적성·합격예측 통합</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">국내 대표 종합 취업 플랫폼, 기업 도입 사례 보유</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">부분 무료 + 유료</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef9c3;color:#854d0e;padding:2px 6px;border-radius:4px;font-size:11px;">⚠️ 일부 진입</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">B2B(대학 취업지원센터) + B2G(지자체 일자리 포털) 모두 진입 확인 — 강원일자리정보망 inFACE 납품 직접 확인. 포지션 직접 경쟁 주의</td>
-                      </tr>
-                      <tr style="opacity:0.55;">
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">meFit<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://mefit.kr" target="_blank" style="color:#888;">mefit.kr</a></span><br><span style="font-size:11px;color:#dc2626;font-weight:600;">⚠️ 회원가입 기능 오류로 테스트 불가</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">이력서 기반 AI 질문 생성, 시선추적 + 표정분석, 영역별 점수 리포트</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">비언어 분석(시선·표정) 특화 — 국민대 캡스톤 디자인 프로젝트 출신</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">유료 (미확인)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">회원가입 기능 오류로 서비스 테스트 불가 (2026-07-21 직접 확인). 기능 설계 참고 목적으로만 유지</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">면접톡<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://interviewtalk.kr" target="_blank" style="color:#888;">interviewtalk.kr</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">채용공고 URL 입력 → 맞춤 질문 자동 생성, 답변 녹화와 AI 피드백 제공, 취업·입시 모두 지원</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">완전 무료, 취업과 입시를 함께 지원</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">무료</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">JD 기반 질문 생성 플로우 — 핵심 UX 패턴으로 참고</td>
-                      </tr>
-                      <tr style="opacity:0.55;">
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Wantive<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://wantive.cloud" target="_blank" style="color:#888;">wantive.cloud</a></span><br><span style="font-size:11px;color:#dc2626;font-weight:600;">⚠️ 소셜 로그인 오류로 테스트 불가</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">삼성·카카오·네이버 등 57개 기업 맞춤 질문, 이력서 기반 AI 분석 리포트, 입시 면접 지원</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기업별 질문 DB 보유 — 소셜 로그인 전용 (일반 회원가입 없음)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">회당 결제 · 30일<br><span style="font-size:11px;color:#888;">1회 ₩1,500 / 5회 ₩6,500 / 10회 ₩12,000</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">소셜 로그인만 지원하나 로그인 불가로 서비스 테스트 불가 (2026-07-21 직접 확인)</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">사람인 AI 면접 연습<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://saramin.co.kr" target="_blank" style="color:#888;">saramin.co.kr</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">hybrid</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">실제 기업 채용 기준 반영 모의면접, 직무 역량 키워드 분석, AI 피드백</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">채용 플랫폼 연동 (실제 공고 데이터)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">유료 · 이용권제<br><span style="font-size:11px;color:#888;">₩10,000/회 (30일 유효) · 직접 구매 필요</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">채용 공고 데이터 연동 강점 — 우리는 기관 공고 연동으로 차별화 가능</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;font-weight:600;">하이잡 (HiJob)<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.haijob.co.kr" target="_blank" style="color:#888;">haijob.co.kr</a></span></td>
-                        <td style="padding:10px 12px;"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;">직무별 맞춤 질문, 답변 피드백, 신입 취준생 특화 콘텐츠</td>
-                        <td style="padding:10px 12px;">직관적 UI, 신입 친화적</td>
-                        <td style="padding:10px 12px;">유료</td>
-                        <td style="padding:10px 12px;"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;font-size:12px;color:#555;">신입 특화 UX — 대학/취업지원기관 대상 기관 솔루션에 응용 가능</td>
-                      </tr>
-                      <tr data-tags="key b2b">
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">EnhanceU ⭐<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://enhanceu.com" target="_blank" style="color:#888;">enhanceu.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f3e8ff;color:#6b21a8;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">B2B특화</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">실사 면접관 영상 + 3D 가상면접관 모의면접 + AI 음성인식(STT) + 말속도·음성 높낮이 분석 + 얼굴인식(미소·감정·자세 27개 특징 정량화·시선추적) + 역량분석 게임 + 전문가 피드백 채팅 + NCS 직업기초능력 + 외국어 면접(영/중/일)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">"국내외 300여 교육기관·공공기관·취업지원기관 활용" <span style="color:#888;">(자사 주장)</span> / 나라장터 G2B 등록 확인. educe보다 기능 풍부. 취업박람회·입시·외항사 승무원 채용 등 다양한 활용</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기관 라이선스 전용 (B2C 없음)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:600;">✅ B2B/B2G 안착</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;"><strong>⚠️ 핵심 경쟁자.</strong> 국내 B2B/B2G 선점자 (규모·기능 educe 앞섬). 피드백 퀄리티는 직접 체험 미완료(미확인). 단, 대화형 기능 없음 — 대화형 + 기관 특화가 차별화 포인트</td>
-                      </tr>
-                      <tr data-tags="key b2b">
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">노트미 (NoteMe) ⭐<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.noteme.me" target="_blank" style="color:#888;">noteme.me</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">대화형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">"면접은 대화다" 컨셉. 맞춤형 질문 + 심층 꼬리질문 + 실시간 피드백 + 개인코치. 텍스트 입력 방식도 지원(음성 외 옵션). 자기소개서 생성·경험정리는 대학/기관 전용</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">국내 유일 대화형 AI 면접관 포지션. 꼬리질문 자연스러움, 질문 퀄리티 호평. 한남대·취업N 등 B2B 납품 확인 (취업N은 B2G 아님)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">₩20,000/회 / 대학·기관 무료(B2B 계약)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef9c3;color:#854d0e;padding:2px 6px;border-radius:4px;font-size:11px;">⚠️ 일부 진입</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;"><strong>국내 대화형 포지션 선점.</strong> 브리핑의 "국내 대화형 공백" 정정 필요. B2B·B2G 모두 진입 중이나 규모·브랜드 인지도 제한적 — 퀄리티 격차로 차별화 가능</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">꼬꼬면<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://kokomen.kr" target="_blank" style="color:#888;">kokomen.kr</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">개발자 기술 면접 특화. 텍스트/구두 모의면접 + 꼬리질문 + 랭커 답변 벤치마킹 + 오답노트 + 이력서·포트폴리오 평가. 9개 기술 분야 500+ 질문 (CS·프레임워크·인프라 등). SW마에스트로 연수생 제작</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">빅테크 면접관 출신 개발자 설계 질문, 랭커 답변 비교, 現 NAVER·카카오뱅크·우아한형제들 개발자 추천</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">무료 (추정)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">개발자 기술 면접 특화 — Hello Interview(해외)와 유사 포지션. 일반 취업 면접 범위와 다르나, 직군 특화 AI 면접 레퍼런스로 참고</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">아이포텐 (I-Poten)<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://i-poten.com" target="_blank" style="color:#888;">i-poten.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">개발자 기술 면접 특화 모바일 앱. AI 모의면접(순차 질문 + 흐름형 후속 질문) + 음성 답변 STT 변환 + 결과 리포트(역량 점수·등급·총평) + IT 용어학습(포텐노트) + 퀴즈·오답노트(포텐퀴즈)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">면접 연습·용어학습·퀴즈 복습을 한 앱에서 연결. 음성 STT 기반 답변 + 크레딧제로 면접 기능 제공. iOS/Android/웹 지원</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">앱 무료 / 면접 기능 크레딧 기반 (단가 미공개)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">꼬꼬면과 동일 포지션(개발자 기술면접 특화)이나 모바일 앱 중심 + 음성 STT 차별화. 개인 개발자(Cygnus) 제작 — 소규모 운영</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">면접도우미<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.interviewdoumi.com" target="_blank" style="color:#888;">interviewdoumi.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">대화형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">AI 면접관 + 꼬리질문 + 자소서 기반 맞춤 질문 생성 + 음성 답변 자동 기록 + 모범 답변 비교</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">완전 무료 + 자소서 기반 질문 생성 + 꼬리질문 — 진입 장벽 없는 대화형 모의면접</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">무료</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">노트미·joblander와 유사한 대화형 포지션. 완전 무료로 B2C 대화형 시장 무료화 압박. B2B/B2G 없음</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <div>
-                <h3 style="margin-bottom:12px;">해외 서비스</h3>
-                <div style="overflow-x:auto;">
-                  <table style="width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed;">
-                    <colgroup>
-                      <col style="width:14%">
-                      <col style="width:8%">
-                      <col style="width:22%">
-                      <col style="width:18%">
-                      <col style="width:12%">
-                      <col style="width:10%">
-                      <col style="width:16%">
-                    </colgroup>
-                    <thead>
-                      <tr style="background:var(--bg-secondary,#f4f4f5);text-align:left;">
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">서비스</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">유형</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">핵심 기능</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">강점</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">가격</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">B2B/기관</th>
-                        <th style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">우리 서비스 적용 포인트</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr style="background:#f0fdf4;" data-tags="key b2b">
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">StandOut ⭐<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://standout.com" target="_blank" style="color:#888;">standout.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">200+ 업종 / 900+ 면접, 고용주·대학 제공 실제 질문 활용, AI 언어 피드백</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">대학 커리어센터 B2B 특화 — 국내 공백 포지션의 해외 벤치마크</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기관 라이선스</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 6px;border-radius:4px;font-size:11px;">✅ 대학 B2B에 안착</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;"><strong>가장 직접적인 벤치마크.</strong> 국내 교육기관 허브 포지션이 비어 있음</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Interviews by AI<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.interviewsby.ai" target="_blank" style="color:#888;">interviewsby.ai</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">JD 입력 → 역할에 맞는 질문 생성, 음성/텍스트 답변 연습, 바로 AI 코칭과 개선 답안 제공</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">순수 연습형으로, 조사 범위에 가장 잘 맞는 후보</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Basic $0 (3 questions/mo) / Pro $9/월</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">프리미엄 전환 구조(무료→Pro) 참고. JD 기반 질문 흐름이 표준 패턴</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">InterviewAI<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.interviewai.io" target="_blank" style="color:#888;">interviewai.io</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">hybrid</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">테스트 모드 / 연습 모드, AI 채점, 상황에 맞는 후속 질문, 지원자 연습과 채용담당자·기관용 흐름</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기관·회사용 기능과 개인 연습을 함께 묶은 하이브리드</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Pilot $99/mo / Growth $299/mo / Scale $799/mo</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:4px;font-size:11px;">⚠️ hybrid</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">기관용 크레딧 모델 — B2G 도입 시 과금 구조 참고</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">AI Interview Agents<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.aiinterviewagents.com" target="_blank" style="color:#888;">aiinterviewagents.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">hybrid</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">AI 기반 영상 면접, 구조화된 연습, 성과 분석, 채용담당자용 스크리닝</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">채용용 화면과 연습용 화면을 함께 제공하는 하이브리드</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">공개 가격 미확인</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:4px;font-size:11px;">⚠️ hybrid</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">채용 스크리닝 기능 — B2B HR 도구로의 확장 가능성 관찰</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Revarta<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://revarta.com" target="_blank" style="color:#888;">revarta.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">전직 FAANG 면접관 튜닝 피드백, 행동면접(STAR) 특화, 발화 분석(속도·습관어)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">행동면접 코칭 품질 — 칭찬이 아닌 솔직한 피드백</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">무료 2회 / ₩11,000 일회 / ₩49,000/월 / ₩129,000 90일</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">STAR 구조 피드백 + 발화 분석 — 고품질 피드백 기준으로 참고</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Yoodli AI<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://yoodli.ai" target="_blank" style="color:#888;">yoodli.ai</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">스피치 분석 — 습관어·말속도·아이컨택·포즈 측정, 역할별 시나리오, 팀 대시보드·LMS 연동(B2B)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">비언어·스피치 품질 특화, B2B 팀/기관 플랜 보유</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Starter 무료(5회) / Pro $8/월 / Advanced $20/월<br><span style="font-size:11px;color:#888;">연간 결제 기준 · Team&Enterprise 별도 문의</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 6px;border-radius:4px;font-size:11px;">✅ B2B 플랜</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">B2B 팀 플랜 + LMS/HRIS 연동 — 기관 도입 모델 참고. SOC 2 Type 2 인증</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Huru AI<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://huru.ai" target="_blank" style="color:#888;">huru.ai</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">무제한 모의면접, 즉시 AI 피드백 리포트, 5만+ 질문 라이브러리, 커스텀 면접 생성, 크롬 익스텐션, 다국어 지원 / Enterprise: 대학·대규모 기관 대상</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">대용량 질문 DB + 다국어 지원, 대학·기관 B2B 플랜 보유</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Starter $24.99/월 / Growth $99/년($8.25/월)<br><span style="font-size:11px;color:#888;">Enterprise 대학·기관 문의</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 6px;border-radius:4px;font-size:11px;">✅ B2B 플랜</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">대학·대규모 기관 Enterprise 플랜 보유 — 국내 교육기관 B2B 진입 시 직접 경쟁 가능성</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Pramp<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://pramp.com" target="_blank" style="color:#888;">pramp.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">구직자끼리 짝을 이뤄 모의면접을 진행하고, 인터뷰어와 인터뷰이 역할을 번갈아 맡음. Exponent 플랫폼과 연계 — P2P 모의면접 자체는 무료 포함</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">코딩 인터뷰 특화, P2P 구조, AI 면접 피드백(유료)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Free 무료(P2P 월 5회) / Annual $12/월(연간, AI 면접 포함)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">기술 면접 특화 — 우리 범위(일반 취업 면접)와 다름. 참고 낮음</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Hello Interview<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://hellointerview.com" target="_blank" style="color:#888;">hellointerview.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">시니어·스태프급 기술 면접 종합 학습 플랫폼. System Design / Low-Level Design / Concurrency / Behavioral / AI Coding 커버리지. 5,000+ 문항 라이브러리, AI 튜터, Guided Practice 포함. 10만+ 사용자</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기술 면접 전반(시스템 디자인·코딩·behavioral·AI Coding), FAANG+ 시니어/스태프급 특화</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">기본 콘텐츠 무료 / 1개월 $47 / 1년 $79 / 평생 $279</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">기술 면접 특화 (FAANG+ 시니어급) — 일반 취업 면접 범위와 다름. 참고 낮음</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-weight:600;">Wonsulting<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://www.wonsulting.com" target="_blank" style="color:#888;">wonsulting.com</a></span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">허브형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">AI 구직 종합 플랫폼(WonsultingAI). ResumAI·CoverLetterAI·NetworkAI·InterviewAI·JobBoardAI 묶음. AI 모의 면접 + 이력서·커버레터·네트워킹 메시지 자동생성 포함. 1:1 인간 전문가 코칭 서비스(별도)도 운영. 2만4천+ 업그레이드 사용자, 62% 30일 내 면접 성사</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">구직 전 단계 AI 자동화 (이력서·커버레터·네트워킹·면접 준비). 면접 준비는 여러 기능 중 하나</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);">Starter 무료 / Premium $19.99/월 (100% 면접 보장)</td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">허브형</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">면접 특화 서비스보다 구직 전 단계 허브에 가까움 — 직접 경쟁보다 adjacent reference</td>
-                      </tr>
-                      <tr>
-                        <td style="padding:10px 12px;font-weight:600;">Prepzi<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://prepzi.ai" target="_blank" style="color:#888;">prepzi.ai</a></span></td>
-                        <td style="padding:10px 12px;"><span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">연습형</span></td>
-                        <td style="padding:10px 12px;">AI 음성 면접관, 답변에 따라 적응형 재질문 생성</td>
-                        <td style="padding:10px 12px;">음성 기반 적응형 면접</td>
-                        <td style="padding:10px 12px;">무료체험 $0 / Interview Pack $10 일회 / Basic $15/월 / Premium $25/월</td>
-                        <td style="padding:10px 12px;"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">B2C만</span></td>
-                        <td style="padding:10px 12px;border-bottom:1px solid var(--border,#e4e4e7);font-size:12px;color:#555;">적응형 재질문 구조 — 질문 흐름 설계 시 참고</td>
-                      </tr>
-                      <tr data-tags="key">
-                        <td style="padding:10px 12px;font-weight:600;">joblander ⭐<br><span style="font-weight:400;font-size:11px;color:#888;"><a href="https://joblander.com" target="_blank" style="color:#888;">joblander.com</a></span></td>
-                        <td style="padding:10px 12px;"><span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;">대화형</span></td>
-                        <td style="padding:10px 12px;">컨설턴트 모드→모의 면접 모드 전환, 꼬리 질문+날카로운 추가 질문, 즉시 피드백</td>
-                        <td style="padding:10px 12px;">실제 면접 압박감 재현 — 베타임에도 국내 서비스 전체를 앞서는 UX (직접 체험)</td>
-                        <td style="padding:10px 12px;">베타(무료)</td>
-                        <td style="padding:10px 12px;"><span style="background:#f1f5f9;color:#64748b;padding:2px 6px;border-radius:4px;font-size:11px;">미확인</span></td>
-                        <td style="padding:10px 12px;font-size:12px;color:#555;"><strong>한국어 음성 지원 확인 (직접 체험).</strong> 대화형 + 한국어 모두 구현된 유일한 서비스. B2B/교육기관 미구축이 공백 — 이 조합이 차별화 포인트</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <div style="background:var(--bg-secondary,#f4f4f5);border-radius:8px;padding:16px;">
-                <h3 style="margin-bottom:10px;">시장 구도 분석</h3>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:14px;">
-                  <div style="background:#fff;border-radius:6px;padding:12px;border-left:3px solid #ef4444;">
-                    <div style="font-size:11px;font-weight:600;color:#ef4444;margin-bottom:4px;">B2C 개인 구직자 — 레드오션</div>
-                    <div style="font-size:12px;color:#555;">국내: 에듀스·meFit·면접톡·Wantive·사람인·하이잡·EnhanceU(B2B특화)·노트미(대화형)·면접도우미(대화형무료)·꼬꼬면(개발자)·아이포텐(개발자 앱)<br>해외: joblander·Interviews by AI·InterviewAI·AI Interview Agents·Wonsulting·Revarta·Yoodli·Huru·Pramp 등</div>
-                  </div>
-                  <div style="background:#fff;border-radius:6px;padding:12px;border-left:3px solid #f59e0b;">
-                    <div style="font-size:11px;font-weight:600;color:#f59e0b;margin-bottom:4px;">국내 교육기관 B2B — 경쟁 있음, 퀄리티·대화형 공백</div>
-                    <div style="font-size:12px;color:#555;"><strong>EnhanceU: 300여 기관 납품 (나라장터 G2B 등록)</strong> — 규모는 선점됨<br>educe inface.ai: B2B·B2G 진입 확인, 퀄리티 미흡<br><span style="color:#b45309;font-weight:600;">공백: 높은 퀄리티의 대화형 AI 면접 기관 서비스</span></div>
-                  </div>
-                  <div style="background:#fff;border-radius:6px;padding:12px;border-left:3px solid #22c55e;">
-                    <div style="font-size:11px;font-weight:600;color:#22c55e;margin-bottom:4px;">해외 교육기관 B2B — StandOut 선점</div>
-                    <div style="font-size:12px;color:#555;">대학 커리어센터 B2B에 이미 안착<br><span style="color:#15803d;font-weight:600;">국내 동일 포지션: 퀄리티·대화형 격차가 차별화 기회</span></div>
-                  </div>
-                </div>
-                <p style="font-size:12px;color:#555;margin:0;line-height:1.6;">국내 B2B/B2G에는 EnhanceU(300여 기관)·educe가 이미 진입해 있다. educe는 직접 체험 결과 피드백 퀄리티가 ChatGPT 수준. EnhanceU는 직접 체험 미완료 — 기능 설계(얼굴인식·역량게임·전문가 피드백)상 educe보다 앞서 보이나 실제 AI 피드백 퀄리티는 미확인. 단, 둘 다 공통적으로 <strong>대화형 AI 면접관 기능이 없다</strong>. 해외에서는 StandOut이 대학 커리어센터 B2B를 검증했다. 국내외 B2B 시장에서 <strong>대화형 면접관 + 교육기관 특화 허브</strong>를 동시에 갖춘 서비스가 없다 — 이것이 실제 공백이자 차별화 포인트다.</p>
-              </div>
-
             </div>
           </div>
         </section>
-
       </section>
     </main>
   </div>
@@ -1599,14 +1188,14 @@
           step("Match Report 확인", "result"),
           step("상세 분석/유료 전환", "export")
         ]),
-        service("rezi", "Rezi", ["해외", "이력서 생성", "AI 문장"], "PDF 이력서", [
+        service("rezi", "Rezi", ["해외", "이력서 생성", "ATS 분석", "AI Agent", "Job Search"], "ATS 최적화 이력서/분석 리포트", [
           step("랜딩", "entry"),
           step("가입", "signup"),
-          step("템플릿 또는 새 이력서 선택", "input"),
-          step("경력 정보 입력", "input"),
-          step("AI 문장 생성", "ai_run"),
-          step("이력서 미리보기", "result"),
-          step("PDF 다운로드/유료 전환", "export")
+          step("기존 이력서 업로드 또는 새 이력서 선택", "input"),
+          step("Job Description/목표 직무 입력", "input"),
+          step("AI Resume Agent 또는 키워드 타겟팅 실행", "ai_run"),
+          step("Rezi Score/ATS 분석 결과 확인", "result"),
+          step("Job Search 또는 지원 문서 다운로드", "export")
         ]),
         service("kickresume", "Kickresume", ["해외", "이력서 생성", "포트폴리오"], "이력서/웹사이트", [
           step("랜딩", "entry"),
@@ -1627,6 +1216,63 @@
         ])
       ]
     };
+
+    // Pre-populated analysis data for output comparison and strategy tables
+    const serviceDataPatch = {
+      saramin: {
+        resultType: "자소서 문항별 초안 텍스트",
+        pricing: "이용권 차감 (문항당 소모), 가격 미공개",
+        strengths: "채용공고 맞춤 자소서 생성, 다양한 편집 기능 (길이 조절·소제목·번역·AI 의심 방어)",
+        limits: "결과물 품질 피드백 없음, 생성 후 사용자가 직접 수정해야 함",
+        apply: "단계별 입력 구조, 공고 연동 맞춤화 방식 참고 / B2G: 기관 단위 공고 연동+생성 워크플로우로 확장 가능"
+      },
+      wanted: {
+        resultType: "이력서 리뷰 피드백 텍스트 (생성 없음)",
+        pricing: "무료, 일 3회 제한",
+        strengths: "포지션 맞춤 피드백, 접근성 높음",
+        limits: "생성 기능 없음, 심층 개선 안내 없음",
+        apply: "간결한 리뷰 피드백 방식 참고 / B2G: 기관 관리자용 최소 리뷰 기능 요건으로 참고"
+      },
+      jasoseol: {
+        resultType: "자소서 문항별 초안",
+        pricing: "무료 B2C + 기업 채용상품 수익화 (공고 노출·브랜딩·후보자 유입)",
+        strengths: "공고 DB 연동, 취준생 커뮤니티, 기업 채용상품 연결",
+        limits: "AI 기능이 주수익원 아님, 개인 유료화 불명확, 생성 이후 경험 약함",
+        apply: "B2C 무료+B2B 수익화 구조 참고 (단, 플랫폼 트래픽 기반이라 그대로 적용 어려움) / B2G: 기관 관리 기능 없으므로 차별화 포인트"
+      },
+      jobmaker: {
+        resultType: "이력서·자소서·면접 질문·증명사진 올인원",
+        pricing: "가입 시 1만 토큰 무료, 이후 구독",
+        strengths: "올인원 기능, 경험 풀 관리, JD 연동 생성",
+        limits: "각 기능 전문성이 특화 서비스 대비 낮을 수 있음, 토큰 소진 후 과금 부담",
+        apply: "경험 풀 관리·버전 관리 기능 참고, 가입 시 크레딧 온보딩 모델 참고 / B2G: 경험 풀 관리를 기관 대시보드에서 학생 단위로 확장"
+      },
+      deepresume: {
+        resultType: "채팅 기반 이력서 + URL 공유",
+        pricing: "무료 이력서 1개, 이후 유료 (가격 미공개)",
+        strengths: "채팅 입력으로 진입 장벽 낮춤, URL 배포, 한국어 결과물 품질 양호",
+        limits: "자소서 없음, 국내 문항형 자소서 문화 미반영, 유료 전환 지점 불명확",
+        apply: "채팅 기반 입력 UX, URL 배포 방식 참고 / B2G: 채팅형 온보딩으로 교육생 프로필 구축"
+      },
+      teal: {
+        resultType: "이력서 PDF + 공고 트래킹 대시보드",
+        pricing: "무료 기본, 유료 $15~29/월",
+        strengths: "취업 활동 전체 통합 관리, Chrome 확장 연동, 락인 효과",
+        limits: "자소서 없음, 국내 공고 연동 없음, 영어권 특화",
+        apply: "공고 트래킹+이력서 통합 구조, 크레딧 온보딩 방식 참고 / B2G: 공고 트래킹을 기관 대시보드에서 학생 단위 지원 현황 관리로 확장"
+      },
+      jobscan: {
+        resultType: "ATS 매칭률 점수 + 키워드 분석 리포트",
+        pricing: "무료 5회/월, 유료 $49.95/월",
+        strengths: "수치화된 피드백, ATS 최적화 특화, 재방문 동기 설계",
+        limits: "이력서 생성 없음, 분석만, 국내 ATS 환경과 차이 있음",
+        apply: "매칭률 점수 개념, 수치 기반 재방문 유도 구조 참고 / B2G: 교육생 이력서 일괄 분석·점수화 기능으로 확장"
+      }
+    };
+    defaultData.services.forEach(svc => {
+      const patch = serviceDataPatch[svc.id];
+      if (patch) Object.assign(svc, patch);
+    });
 
     function service(id, name, tags, resultType, steps) {
       return {
@@ -1660,25 +1306,11 @@
     }
 
     const storageKey = "ai_service_capture_board_v1";
-    const githubTokenKey = "ai_service_capture_board_github_token";
-    const publishedDataPath = "data.json";
-    const githubConfig = {
-      owner: "havegrit",
-      repo: "ai-service-comparison-board",
-      branch: "main",
-      path: "data.json"
-    };
     const DB_NAME = "ai_capture_board_db";
     const DB_STORE = "data";
     let data = structuredClone(defaultData);
     let activeView = "dashboard";
     let _db = null;
-    let loadState = {
-      source: "default",
-      remoteLoaded: false,
-      localDraft: false,
-      message: ""
-    };
 
     function openDB() {
       return new Promise((resolve, reject) => {
@@ -1692,34 +1324,7 @@
       });
     }
 
-    function normalizeData(value) {
-      const normalized = structuredClone(value && typeof value === "object" ? value : defaultData);
-      if (!Array.isArray(normalized.services)) normalized.services = [];
-      normalized.services.forEach(svc => {
-        if (!Array.isArray(svc.tags)) svc.tags = [];
-        if (!Array.isArray(svc.steps)) svc.steps = [];
-        svc.steps.forEach(item => {
-          if (!item.images) item.images = item.image ? [item.image] : [];
-          delete item.image;
-        });
-      });
-      if (!normalized.selectedServiceId && normalized.services[0]) normalized.selectedServiceId = normalized.services[0].id;
-      normalized._meta = normalized._meta && typeof normalized._meta === "object" ? normalized._meta : {};
-      return normalized;
-    }
-
-    async function fetchPublishedData() {
-      try {
-        const response = await fetch(`${publishedDataPath}?v=${Date.now()}`, { cache: "no-store" });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return normalizeData(await response.json());
-      } catch (err) {
-        console.warn("published snapshot load failed:", err);
-        return null;
-      }
-    }
-
-    async function loadLocalData() {
+    async function loadData() {
       try {
         const db = await openDB();
         const parsed = await new Promise((resolve, reject) => {
@@ -1728,68 +1333,37 @@
           req.onsuccess = () => resolve(req.result);
           req.onerror = () => reject(req.error);
         });
-        if (parsed) return normalizeData(parsed);
+        if (parsed) {
+          parsed.services?.forEach(svc => {
+            svc.steps?.forEach(s => {
+              if (!s.images) s.images = s.image ? [s.image] : [];
+              delete s.image;
+            });
+            const patch = serviceDataPatch[svc.id];
+            if (patch) {
+              Object.keys(patch).forEach(key => { if (!svc[key]) svc[key] = patch[key]; });
+            }
+          });
+          return parsed;
+        }
       } catch (err) {
         console.warn("IndexedDB load failed, trying localStorage fallback:", err);
         try {
           const saved = localStorage.getItem(storageKey);
-          if (saved) return normalizeData(JSON.parse(saved));
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            parsed.services?.forEach(svc => svc.steps?.forEach(s => {
+              if (!s.images) s.images = s.image ? [s.image] : [];
+              delete s.image;
+            }));
+            return parsed;
+          }
         } catch (e2) { console.warn(e2); }
       }
-      return null;
+      return structuredClone(defaultData);
     }
 
-    function hasLocalDraft(localData) {
-      if (!localData) return false;
-      if (!localData._meta || !("hasLocalDraft" in localData._meta)) return true;
-      return localData._meta.hasLocalDraft === true;
-    }
-
-    async function loadData() {
-      const [published, local] = await Promise.all([fetchPublishedData(), loadLocalData()]);
-      if (hasLocalDraft(local)) {
-        loadState = {
-          source: "local",
-          remoteLoaded: Boolean(published),
-          localDraft: true,
-          message: published ? "로컬 편집본 사용 중" : "로컬 편집본 사용 중, 원격 스냅샷 없음"
-        };
-        return local;
-      }
-      if (published) {
-        loadState = {
-          source: "published",
-          remoteLoaded: true,
-          localDraft: false,
-          message: "게시된 스냅샷 사용 중"
-        };
-        return published;
-      }
-      if (local) {
-        loadState = {
-          source: "local",
-          remoteLoaded: false,
-          localDraft: false,
-          message: "저장된 로컬 데이터 사용 중"
-        };
-        return local;
-      }
-      loadState = {
-        source: "default",
-        remoteLoaded: false,
-        localDraft: false,
-        message: "기본 템플릿 사용 중"
-      };
-      return normalizeData(defaultData);
-    }
-
-    async function saveData(options = {}) {
-      const contentChange = options.contentChange !== false;
-      data = normalizeData(data);
-      data._meta.localUpdatedAt = new Date().toISOString();
-      if (contentChange) data._meta.hasLocalDraft = true;
-      loadState.localDraft = data._meta.hasLocalDraft === true;
-      loadState.source = loadState.localDraft ? "local" : loadState.source;
+    async function saveData() {
       try {
         const db = await openDB();
         await new Promise((resolve, reject) => {
@@ -1837,27 +1411,22 @@
       return service.steps.reduce((sum, s) => sum + (s.images?.length || 0), 0);
     }
 
-    function completedStepCount(service) {
-      return service.steps.reduce((sum, s) => sum + ((s.images?.length || 0) > 0 ? 1 : 0), 0);
-    }
-
     function progress(service) {
       if (!service.steps.length) return 0;
-      return Math.round((completedStepCount(service) / service.steps.length) * 100);
+      return Math.round((imageCount(service) / service.steps.length) * 100);
     }
 
     function setView(view) {
       activeView = view;
-      localStorage.setItem("activeView", view);
       document.querySelectorAll(".view").forEach(el => el.classList.toggle("active", el.id === view));
       document.querySelectorAll(".nav button").forEach(el => el.classList.toggle("active", el.dataset.view === view));
       const titleMap = {
-        dashboard: "전체 요약",
-        "service-flow": "서비스별 흐름",
-        "stage-compare": "단계별 비교",
-        "output-compare": "결과물 비교",
-        strategy: "기획 적용점",
-        interview: "AI 면접 플랫폼"
+        dashboard: "01 전체 요약",
+        "service-flow": "02 서비스별 흐름",
+        "stage-compare": "03 단계별 비교",
+        "output-compare": "04 결과물 비교",
+        strategy: "05 기획 적용점",
+        "jeju-universities": "06 제주 대학 지원단"
       };
       document.getElementById("viewTitle").textContent = titleMap[view] || "비교 보드";
       const fab = document.getElementById("fabAddStep");
@@ -1865,39 +1434,7 @@
       render();
     }
 
-    function saveBriefing() {
-      const data = {
-        conclusion: document.getElementById("bf-conclusion").value,
-        evidence: document.getElementById("bf-evidence").value,
-        decision: document.getElementById("bf-decision").value,
-        reference: document.getElementById("bf-reference").value,
-      };
-      localStorage.setItem("briefing-data", JSON.stringify(data));
-    }
-
-    function loadBriefing() {
-      try {
-        const data = JSON.parse(localStorage.getItem("briefing-data") || "{}");
-        if (data.conclusion !== undefined) document.getElementById("bf-conclusion").value = data.conclusion;
-        if (data.evidence !== undefined) document.getElementById("bf-evidence").value = data.evidence;
-        if (data.decision !== undefined) document.getElementById("bf-decision").value = data.decision;
-        if (data.reference !== undefined) document.getElementById("bf-reference").value = data.reference;
-      } catch {}
-    }
-
-    function copyBriefingText() {
-      const sections = [
-        ["결론 / 제안", document.getElementById("bf-conclusion").value],
-        ["근거", document.getElementById("bf-evidence").value],
-        ["의사결정 포인트", document.getElementById("bf-decision").value],
-        ["참고", document.getElementById("bf-reference").value],
-      ];
-      const text = sections.map(([title, val]) => `[${title}]\n${val || "(미작성)"}`).join("\n\n");
-      navigator.clipboard.writeText(text).then(() => alert("클립보드에 복사됐습니다."));
-    }
-
     function render() {
-      renderSyncStatus();
       renderDashboard();
       renderServiceList();
       renderFlowEditor();
@@ -1906,31 +1443,15 @@
       renderStrategyTable();
     }
 
-    function renderSyncStatus() {
-      const el = document.getElementById("syncStatus");
-      if (!el) return;
-      const tokenReady = Boolean(localStorage.getItem(githubTokenKey));
-      const publishedAt = data._meta?.publishedAt ? new Date(data._meta.publishedAt).toLocaleString("ko-KR") : "게시 기록 없음";
-      const localAt = data._meta?.localUpdatedAt ? new Date(data._meta.localUpdatedAt).toLocaleString("ko-KR") : "";
-      const draftText = data._meta?.hasLocalDraft ? "로컬 편집본 있음" : "게시본과 동기화됨";
-      el.innerHTML = `
-        <strong>${escapeHtml(draftText)}</strong>
-        <span> · ${escapeHtml(loadState.message || "상태 확인 완료")}</span>
-        <span> · 게시: ${escapeHtml(publishedAt)}</span>
-        ${localAt ? `<span> · 로컬 저장: ${escapeHtml(localAt)}</span>` : ""}
-        <span> · GitHub 토큰: ${tokenReady ? "설정됨" : "미설정"}</span>
-      `;
-    }
-
     function renderDashboard() {
       const services = filteredServices();
       const totalSteps = data.services.reduce((sum, service) => sum + service.steps.length, 0);
-      const totalCompletedSteps = data.services.reduce((sum, service) => sum + completedStepCount(service), 0);
+      const totalImages = data.services.reduce((sum, service) => sum + imageCount(service), 0);
       const avgProgress = data.services.length ? Math.round(data.services.reduce((sum, service) => sum + progress(service), 0) / data.services.length) : 0;
 
       document.getElementById("statServices").textContent = data.services.length;
       document.getElementById("statSteps").textContent = totalSteps;
-      document.getElementById("statImages").textContent = totalCompletedSteps;
+      document.getElementById("statImages").textContent = totalImages;
       document.getElementById("statProgress").textContent = avgProgress + "%";
 
       const allTags = [...new Set(data.services.flatMap(service => service.tags))].sort();
@@ -1947,7 +1468,7 @@
           </div>
           <div class="tag-row">${service.tags.map(tag => `<span class="tag ${tagClass(tag)}">${escapeHtml(tag)}</span>`).join("")}</div>
           <div>
-            <div class="small-text muted">완료 단계 ${completedStepCount(service)} / ${service.steps.length}</div>
+            <div class="small-text muted">캡처 ${imageCount(service)} / ${service.steps.length}</div>
             <div class="progress"><span style="width:${progress(service)}%"></span></div>
           </div>
           <div class="small-text muted">${escapeHtml(service.summary || "요약 메모를 입력하세요.")}</div>
@@ -1975,9 +1496,9 @@
     function renderServiceList() {
       const list = document.getElementById("serviceList");
       list.innerHTML = data.services.map(service => `
-        <button class="${service.id === data.selectedServiceId ? "active" : ""}" draggable="true" data-service-id="${service.id}" onclick="selectService('${service.id}')">
+        <button class="${service.id === data.selectedServiceId ? "active" : ""}" onclick="selectService('${service.id}')">
           <strong>${escapeHtml(service.name)}</strong>
-          <span class="drag-handle" title="드래그로 순서 변경">⠿</span>
+          <div class="small-text muted">캡처 ${imageCount(service)} / ${service.steps.length}</div>
         </button>
       `).join("");
     }
@@ -2085,44 +1606,45 @@
     }
 
     function renderStageCompare() {
-      const container = document.getElementById("stageCompare");
-      if (!data.services.length) {
-        container.innerHTML = `<div class="empty-state">서비스를 추가하세요.</div>`;
-        return;
-      }
-      container.innerHTML = data.services.map(service => {
-        const steps = service.steps || [];
-        const stepCards = steps.map((item, idx) => {
-          const hasImg = item.images?.length;
-          const stageName = item.commonStage ? getStageName(item.commonStage) : "";
-          const captures = hasImg
-            ? item.images.map((src, i) => `
-                <div class="svc-capture" onclick="openImage('${service.id}', '${item.id}', ${i})">
-                  <img src="${src}" alt="${escapeAttr(service.name)} ${escapeAttr(item.title)}">
-                </div>`).join("")
-            : `<div class="svc-capture no-image">캡처 없음</div>`;
+      const filter = document.getElementById("commonStageFilter");
+      const current = filter.value || "all";
+      filter.innerHTML = `<option value="all">전체 단계</option>${commonStages.map(stage => `<option value="${stage.id}">${escapeHtml(stage.name)}</option>`).join("")}`;
+      filter.value = current;
+
+      const stages = current === "all" ? commonStages : commonStages.filter(stage => stage.id === current);
+      const boards = stages.map(stage => {
+        const cards = data.services.map(service => {
+          const matched = service.steps.find(item => item.commonStage === stage.id);
           return `
-            <article class="svc-step-card">
-              <div class="svc-step-head">
-                <span class="step-index">STEP ${idx + 1}</span>
-                <span class="svc-step-title">${escapeHtml(item.title)}</span>
-                ${stageName ? `<span class="stage-chip">${escapeHtml(stageName)}</span>` : ""}
-              </div>
-              <div class="svc-capture-stack">${captures}</div>
-              ${item.note ? `<div class="note">${escapeHtml(item.note)}</div>` : ""}
+            <article class="compare-card">
+              <div class="compare-card-title">${escapeHtml(service.name)}</div>
+              ${matched ? `
+                <div class="small-text muted">${escapeHtml(matched.title)}</div>
+                <div class="capture-box ${matched.images?.length ? "has-image" : ""}" onclick="${matched.images?.length ? `openImage('${service.id}', '${matched.id}', 0)` : ""}">
+                  ${matched.images?.length ? `<img src="${matched.images[0]}" alt="${escapeAttr(service.name)} ${escapeAttr(matched.title)}">` : `<div class="capture-placeholder">이미지 없음</div>`}
+                  ${matched.images?.length > 1 ? `<span class="img-count-badge">+${matched.images.length - 1}</span>` : ""}
+                </div>
+                <div class="note">${escapeHtml(matched.note || "")}</div>
+              ` : `
+                <div class="capture-box"><div class="capture-placeholder">해당 단계 없음</div></div>
+                <div class="note">이 서비스의 실제 흐름에는 이 단계가 없거나 아직 분류되지 않았습니다.</div>
+              `}
             </article>
           `;
         }).join("");
         return `
-          <section class="svc-flow-block">
-            <div class="svc-flow-header">
-              <strong>${escapeHtml(service.name)}</strong>
-              <span class="small-text muted">${completedStepCount(service)} / ${steps.length} 단계 완료</span>
+          <section class="stage-board">
+            <div class="stage-board-header">
+              <strong>${escapeHtml(stage.name)}</strong>
+              <span class="small-text muted">서비스별 첫 번째 매칭 단계 기준</span>
             </div>
-            <div class="svc-step-list">${stepCards || `<div class="empty-state">등록된 단계가 없습니다.</div>`}</div>
+            <div class="horizontal-scroll">
+              <div class="compare-row">${cards}</div>
+            </div>
           </section>
         `;
       }).join("");
+      document.getElementById("stageCompare").innerHTML = boards;
     }
 
     function renderOutputTable() {
@@ -2175,7 +1697,7 @@
 
     function selectService(id) {
       data.selectedServiceId = id;
-      saveData({ contentChange: false });
+      saveData();
     }
 
     function openService(id) {
@@ -2420,123 +1942,6 @@
       reader.readAsText(file);
     }
 
-    function setGithubToken() {
-      const existing = localStorage.getItem(githubTokenKey) || "";
-      const token = prompt(
-        "GitHub fine-grained token을 입력하세요. 이 브라우저 localStorage에만 저장됩니다. 빈 값으로 저장하면 기존 토큰을 삭제합니다.",
-        existing
-      );
-      if (token === null) return;
-      const trimmed = token.trim();
-      if (trimmed) {
-        localStorage.setItem(githubTokenKey, trimmed);
-        alert("GitHub 토큰을 저장했습니다.");
-      } else {
-        localStorage.removeItem(githubTokenKey);
-        alert("GitHub 토큰을 삭제했습니다.");
-      }
-      render();
-    }
-
-    function requireGithubToken() {
-      let token = localStorage.getItem(githubTokenKey);
-      if (token) return token;
-      token = prompt("게시하려면 GitHub fine-grained token이 필요합니다. repo Contents: Read and write 권한이 있는 토큰을 입력하세요.");
-      if (!token || !token.trim()) throw new Error("GitHub 토큰이 없습니다.");
-      token = token.trim();
-      localStorage.setItem(githubTokenKey, token);
-      return token;
-    }
-
-    function base64EncodeUtf8(value) {
-      const bytes = new TextEncoder().encode(value);
-      let binary = "";
-      bytes.forEach(byte => { binary += String.fromCharCode(byte); });
-      return btoa(binary);
-    }
-
-    async function getGithubFile(token) {
-      const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
-      const response = await fetch(url, {
-        headers: {
-          "Accept": "application/vnd.github+json",
-          "Authorization": `Bearer ${token}`,
-          "X-GitHub-Api-Version": "2022-11-28"
-        }
-      });
-      if (response.status === 404) return null;
-      if (!response.ok) throw new Error(`GitHub 파일 조회 실패: HTTP ${response.status}`);
-      return response.json();
-    }
-
-    async function publishSnapshot() {
-      try {
-        const token = requireGithubToken();
-        const now = new Date().toISOString();
-        const snapshot = normalizeData(data);
-        snapshot._meta = {
-          ...snapshot._meta,
-          publishedAt: now,
-          localUpdatedAt: now,
-          hasLocalDraft: false,
-          source: "github-pages-snapshot"
-        };
-        const current = await getGithubFile(token);
-        const body = {
-          message: `Publish AI service comparison snapshot ${now.slice(0, 10)}`,
-          content: base64EncodeUtf8(JSON.stringify(snapshot, null, 2) + "\n"),
-          branch: githubConfig.branch
-        };
-        if (current?.sha) body.sha = current.sha;
-
-        const response = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`, {
-          method: "PUT",
-          headers: {
-            "Accept": "application/vnd.github+json",
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json",
-            "X-GitHub-Api-Version": "2022-11-28"
-          },
-          body: JSON.stringify(body)
-        });
-        if (!response.ok) {
-          const text = await response.text();
-          throw new Error(`GitHub 게시 실패: HTTP ${response.status} ${text.slice(0, 300)}`);
-        }
-
-        data = snapshot;
-        loadState = {
-          source: "published",
-          remoteLoaded: true,
-          localDraft: false,
-          message: "방금 게시 완료"
-        };
-        await saveData({ contentChange: false });
-        alert("게시가 완료됐습니다. GitHub Pages 반영에는 보통 수십 초 정도 걸립니다.");
-      } catch (error) {
-        console.error(error);
-        alert(error.message || "게시 중 오류가 발생했습니다.");
-      }
-    }
-
-    async function refreshPublishedData() {
-      if (data._meta?.hasLocalDraft && !confirm("로컬 편집본이 있습니다. 게시된 원격 스냅샷으로 덮어쓸까요?")) return;
-      const published = await fetchPublishedData();
-      if (!published) {
-        alert("게시된 data.json을 불러오지 못했습니다.");
-        return;
-      }
-      data = published;
-      data._meta.hasLocalDraft = false;
-      loadState = {
-        source: "published",
-        remoteLoaded: true,
-        localDraft: false,
-        message: "원격 스냅샷 새로고침 완료"
-      };
-      await saveData({ contentChange: false });
-    }
-
     function resetData() {
       if (!confirm("모든 입력 내용을 초기 상태로 되돌릴까요? 백업하지 않은 캡처와 메모는 사라집니다.")) return;
       data = structuredClone(defaultData);
@@ -2560,55 +1965,10 @@
       const button = event.target.closest("button[data-view]");
       if (button) setView(button.dataset.view);
     });
-
-    const savedView = localStorage.getItem("activeView");
-    if (savedView) setView(savedView);
-
-    // 서비스 목록 드래그 정렬 (순서는 저장되어 모든 화면에 반영됨)
-    let _dragServiceId = null;
-    const serviceListEl = document.getElementById("serviceList");
-    serviceListEl.addEventListener("dragstart", event => {
-      const btn = event.target.closest("button[data-service-id]");
-      if (!btn) return;
-      _dragServiceId = btn.dataset.serviceId;
-      btn.classList.add("dragging");
-      event.dataTransfer.effectAllowed = "move";
-    });
-    serviceListEl.addEventListener("dragover", event => {
-      if (!_dragServiceId) return;
-      event.preventDefault();
-      event.dataTransfer.dropEffect = "move";
-      const btn = event.target.closest("button[data-service-id]");
-      serviceListEl.querySelectorAll("button").forEach(b => b.classList.remove("drop-target"));
-      if (btn && btn.dataset.serviceId !== _dragServiceId) btn.classList.add("drop-target");
-    });
-    serviceListEl.addEventListener("drop", event => {
-      event.preventDefault();
-      const btn = event.target.closest("button[data-service-id]");
-      if (!_dragServiceId || !btn) return;
-      const fromId = _dragServiceId;
-      const toId = btn.dataset.serviceId;
-      if (fromId !== toId) {
-        const arr = data.services;
-        const fromIdx = arr.findIndex(s => s.id === fromId);
-        const toIdx = arr.findIndex(s => s.id === toId);
-        if (fromIdx > -1 && toIdx > -1) {
-          const [moved] = arr.splice(fromIdx, 1);
-          arr.splice(toIdx, 0, moved);
-          saveData();
-        }
-      }
-    });
-    serviceListEl.addEventListener("dragend", () => {
-      _dragServiceId = null;
-      serviceListEl.querySelectorAll("button").forEach(b => b.classList.remove("drop-target", "dragging"));
-    });
     document.getElementById("addServiceBtn").addEventListener("click", addService);
     document.getElementById("serviceSearch").addEventListener("input", renderDashboard);
     document.getElementById("tagFilter").addEventListener("change", renderDashboard);
-    document.getElementById("publishSnapshot").addEventListener("click", publishSnapshot);
-    document.getElementById("refreshPublished").addEventListener("click", refreshPublishedData);
-    document.getElementById("githubTokenBtn").addEventListener("click", setGithubToken);
+    document.getElementById("commonStageFilter").addEventListener("change", renderStageCompare);
     document.getElementById("exportJson").addEventListener("click", exportJson);
     document.getElementById("importJson").addEventListener("click", () => document.getElementById("importJsonInput").click());
     document.getElementById("importJsonInput").addEventListener("change", event => importJson(event.target.files[0]));
@@ -2646,7 +2006,6 @@
       render();
     }
     initApp();
-
   </script>
 </body>
 </html>
